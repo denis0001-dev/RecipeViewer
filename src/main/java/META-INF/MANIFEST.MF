@@ -1,0 +1,2 @@
+Main-Class: ru.morozovit.recipeviewer.Main
+Manifest-Version: 1
