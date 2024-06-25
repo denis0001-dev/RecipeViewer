@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="490.0" maxWidth="670.0" prefHeight="490.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.morozovit.recipeviewer.gui.Controller">
+  <TabPane prefHeight="490.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE">
+    <Tab text="Create a Recipe">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <padding>
+          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+        <Label layoutX="14.0" layoutY="14.0" text="Recipe Name" />
+        <TextField fx:id="recipeName" layoutX="106.0" layoutY="10.0" promptText="Your name" />
+        <VBox layoutX="74.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" />
+        <TitledPane animated="false" layoutX="14.0" layoutY="51.0" prefHeight="370.0" prefWidth="290.0" text="Ingredients">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="394.0" prefWidth="219.0">
+            <Button fx:id="addIngredient" layoutY="313.0" mnemonicParsing="false" onAction="#addIngredient" prefHeight="30.0" prefWidth="289.0" text="Add" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="-1.0" prefHeight="316.0" prefWidth="290.0">
+              <VBox fx:id="ingredients" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="280.0">
+                <!--
+                <GridPane>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="34.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="155.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="45.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="50.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="41.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <TextField prefHeight="26.0" prefWidth="152.0" GridPane.columnIndex="1" />
+                  <TextField GridPane.columnIndex="2" />
+                  <TextField prefHeight="26.0" prefWidth="30.0" GridPane.columnIndex="3" />
+                  <Label text="#1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" text="X" GridPane.columnIndex="4" />
+                </GridPane>
+                -->
+              </VBox>
+            </ScrollPane>
+          </AnchorPane>
+        </TitledPane>
+        <TitledPane animated="false" layoutX="316.0" layoutY="51.0" prefHeight="370.0" prefWidth="340.0" text="Steps">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="408.0">
+            <ScrollPane layoutX="-1.0" prefHeight="316.0" prefWidth="340.0">
+              <VBox fx:id="steps" minHeight="0.0" minWidth="0.0" prefHeight="32.0" prefWidth="335.0">
+                <!--
+                <GridPane prefHeight="30.0" prefWidth="322.0">
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="21.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="279.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="9.0" prefWidth="28.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <TextField prefHeight="26.0" prefWidth="152.0" GridPane.columnIndex="1" />
+                  <Label text="#1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" text="X" GridPane.columnIndex="2" />
+                </GridPane>
+                -->
+              </VBox>
+            </ScrollPane>
+            <Button fx:id="addStep" layoutX="-1.0" layoutY="317.0" mnemonicParsing="false" onAction="#addStep" prefHeight="26.0" prefWidth="340.0" text="Add" />
+          </AnchorPane>
+        </TitledPane>
+        <Button fx:id="create" layoutX="14.0" layoutY="427.0" mnemonicParsing="false" onAction="#create" text="Create" />
+            <Button fx:id="loadFromExistingFile" layoutX="498.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadFromFile" text="Load from existing file" />
+            <Button fx:id="clearRecipe" layoutX="438.0" layoutY="10.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+      </AnchorPane>
+    </Tab>
+    <Tab text="View a recipe">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label layoutX="14.0" layoutY="14.0" text="Recipe File:" />
+            <TextField fx:id="view_recipeFile" layoutX="87.0" layoutY="10.0" onKeyTyped="#viewRecipe" prefHeight="26.0" prefWidth="69.0" />
+            <Button fx:id="view_selectFile" layoutX="156.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewSelectFile" text="Select File" />
+            <Label layoutX="14.0" layoutY="47.0" text="Recipe Multiplier:" />
+            <TextField fx:id="view_recipeMultiplier" layoutX="129.0" layoutY="43.0" onKeyTyped="#view_update" prefHeight="26.0" prefWidth="25.0" text="1" />
+            <TitledPane layoutX="10.0" layoutY="82.0" prefHeight="369.0" prefWidth="239.0" text="Ingredients">
+                <ScrollPane prefHeight="360.0" prefWidth="237.0">
+                    <VBox fx:id="view_ingredients" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="230.0">
+                        <!--
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="33.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="133.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="31.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="37.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <Label alignment="CENTER" text="#1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                            <Label text="Test" GridPane.columnIndex="1" />
+                            <Label text="1" GridPane.columnIndex="2" />
+                            <Label text="e" GridPane.columnIndex="3" />
+                        </GridPane>
+                        -->
+                    </VBox>
+                </ScrollPane>
+            </TitledPane>
+            <VBox alignment="TOP_CENTER" layoutX="251.0" layoutY="82.0" prefHeight="360.0" prefWidth="410.0">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <Label fx:id="view_stepNumber" alignment="CENTER" prefHeight="18.0" prefWidth="442.0">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="view_stepDesc" alignment="CENTER" contentDisplay="CENTER" prefHeight="274.0" prefWidth="390.0" textAlignment="CENTER" wrapText="true" />
+                <AnchorPane prefHeight="0.0" prefWidth="396.0">
+                    <Button fx:id="view_next" layoutX="330.0" layoutY="29.0" mnemonicParsing="false" onAction="#view_nextStep" text="Next &gt;&gt;" />
+                    <Button fx:id="view_previous" disable="true" layoutY="29.0" mnemonicParsing="false" onAction="#view_previousStep" text="&lt;&lt; Previous" />
+                </AnchorPane>
+            </VBox>
+        </AnchorPane>
+    </Tab>
+    <Tab text="Settings">
+      <AnchorPane>
+        <Label layoutX="14.0" layoutY="14.0" text="Language:" />
+        <ChoiceBox layoutX="88.0" layoutY="10.0" prefWidth="150.0" value="English">
+            <String fx:value="English" />
+            <String fx:value="Russian" />
+        </ChoiceBox>
+            <Label layoutX="14.0" layoutY="43.0" text="Recipes directory:" />
+            <TextField layoutX="131.0" layoutY="39.0" prefHeight="26.0" prefWidth="110.0" text="./recipes" />
+            <Button layoutX="241.0" layoutY="39.0" mnemonicParsing="false" text="Select File" />
+      </AnchorPane>
+    </Tab>
+    <Tab text="About">
+      <AnchorPane>
+        <Label layoutX="14.0" layoutY="14.0" text="RecipeViewer 1.0" />
+        <Label layoutX="14.0" layoutY="32.0" text="Based on the CLI version" />
+        <Hyperlink fx:id="githubProject" layoutX="14.0" layoutY="50.0" onAction="#openGithubProject" text="Project on Github" />
+      </AnchorPane>
+    </Tab>
+  </TabPane>
+</AnchorPane>

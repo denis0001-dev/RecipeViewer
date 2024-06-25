@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recipe Helper</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta lang="en" />
+
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="google-sans/stylesheet.css" />
+        <link rel="stylesheet" href="global.css" />
+        <script src="script.js"></script>
+
+        <!-- Material Design -->
+        <script type="importmap">
+            {
+                "imports": {
+                    "@material/web/": "https://esm.run/@material/web/"
+                }
+            }
+        </script>
+        <script type="module">
+            import '@material/web/all.js';
+            import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+            document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+        </script>
+    </head>
+
+    <body>
+        <md-checkbox></md-checkbox>
+        <md-filled-button id="test">Test</md-filled-button>
+    </body>
+</html>

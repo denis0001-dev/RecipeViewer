@@ -1,0 +1,5 @@
+@import url('google-sans/stylesheet.css');
+
+* {
+    font-family: 'Google Sans', Roboto, 'Open Sans', Helvetica, sans-serif, system-ui;
+}
