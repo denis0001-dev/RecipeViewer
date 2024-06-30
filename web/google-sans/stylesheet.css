@@ -2,10 +2,10 @@
     font-family: 'Google Sans';
     src: url('GoogleSans-MediumItalic.eot');
     src: local('Google Sans Medium Italic'), local('GoogleSans-MediumItalic'),
-        url('GoogleSans-MediumItalic.eot?#iefix') format('embedded-opentype'),
-        url('GoogleSans-MediumItalic.woff2') format('woff2'),
-        url('GoogleSans-MediumItalic.woff') format('woff'),
-        url('GoogleSans-MediumItalic.ttf') format('truetype');
+    url('GoogleSans-MediumItalic.eot?#iefix') format('embedded-opentype'),
+    url('GoogleSans-MediumItalic.woff2') format('woff2'),
+    url('GoogleSans-MediumItalic.woff') format('woff'),
+    url('GoogleSans-MediumItalic.ttf') format('truetype');
     font-weight: 500;
     font-style: italic;
 }

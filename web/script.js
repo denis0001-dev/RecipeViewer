@@ -1,11 +1,107 @@
-document.onreadystatechange = () => {
-    if (document.readyState === 'complete') {
-        main();
-    }
-}
+// noinspection ES6MissingAwait
 
-function main() {
-    document.getElementById("test").addEventListener("click", () => {
-        console.log("test clicked");
+document.addEventListener("DOMContentLoaded", root_page);
+
+function root_page() {
+    const tabs = document.getElementById("tabs");
+
+    let iframe_left = document.getElementById("page-left");
+    let iframe = document.getElementById("page");
+    let iframe_right = document.getElementById("page-right");
+
+    const iframes = document.getElementById("iframes");
+
+    let prevIndex = -1;
+    let currentIndex = -1;
+
+    async function setPage(page) {
+        /* iframe.src = `pages/${page}/index.html`; */
+        const url = `pages/${page}/index.html`;
+
+        async function animateChange() {
+            iframe.src = url;
+            iframes.style.animation = "none";
+            iframe.style.animation = "appear 0.5s ease-in-out";
+            await delay(500);
+            iframe.style.opacity = '1';
+            iframe.style.animation = "none";
+        }
+
+        function clearURLs() {
+            iframe_left.src = "";
+            iframe_right.src = "";
+        }
+
+        // Right
+        if (currentIndex > prevIndex) {
+            iframe_right.style.opacity = '0';
+            iframes.style.animation = "slide_right 0.5s ease-in-out";
+            await delay(500);
+            iframe_left.insertAdjacentElement('afterend', iframe_right);
+            const iframe_r = document.getElementById("page-right");
+            iframe_r.id = "_page";
+            iframe.id = "page-right";
+            iframe_r.id = "page";
+
+            iframe = document.getElementById("page");
+            iframe_right = document.getElementById("page-right");
+            animateChange();
+        }
+        // Left
+        else if (currentIndex < prevIndex) {
+            iframe_left.style.opacity = '0';
+            iframes.style.animation = "slide_left 0.5s ease-in-out";
+            await delay(500);
+            iframe_right.insertAdjacentElement("beforebegin", iframe_left);
+            const iframe_l = document.getElementById("page-left");
+            iframe_l.id = "_page";
+            iframe.id = "page-left";
+            iframe_l.id = "page";
+
+            iframe = document.getElementById("page");
+            iframe_left = document.getElementById("page-left");
+            animateChange();
+        }
+        // Current
+        else if (iframe.src !== url) {
+            iframe.src = url;
+        }
+        clearURLs();
+    }
+
+    async function switchTab(tabIndex) {
+        const tab = tabs.children[tabIndex];
+        const button = tab.shadowRoot.children[0];
+        const ripple = button.querySelector("md-ripple");
+
+        // Disable the ripple
+        const prevDisplay = ripple.style.display;
+        ripple.style.display = "none";
+
+        button.dispatchEvent(new Event("click"));
+        await delay(500);
+        // Enable the ripple again
+        ripple.style.display = prevDisplay;
+    }
+
+    window.switchTab = switchTab;
+
+    tabs.addEventListener("change", (event) => {
+        // noinspection JSUnresolvedReference
+        currentIndex = event.target.activeTabIndex;
+        if (currentIndex === 0) {
+            setPage("home");
+        } else if (currentIndex === 1) {
+            setPage("create");
+        } else if (currentIndex === 2) {
+            setPage("view");
+        } else if (currentIndex === 3) {
+            setPage("settings");
+        } else if (currentIndex === 4) {
+            setPage("about");
+        }
+
+        // noinspection JSUnresolvedReference
+        prevIndex = event.target.activeTabIndex;
     })
 }

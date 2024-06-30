@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Recipe Helper</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta lang="en" />
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta lang="en"/>
 
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="google-sans/stylesheet.css" />
-        <link rel="stylesheet" href="global.css" />
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="global.css"/>
         <script src="script.js"></script>
+        <script src="global.js"></script>
 
         <!-- Material Design -->
+        <link rel="stylesheet" href="google-sans/stylesheet.css"/>
         <script type="importmap">
             {
                 "imports": {
@@ -20,15 +21,41 @@
             }
         </script>
         <script type="module">
-            import '@material/web/all.js';
+            import '@material/web/all.js'; // noinspection JSFileReferences,NpmUsedModulesInstalled
             import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
 
             document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
         </script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     </head>
 
     <body>
-        <md-checkbox></md-checkbox>
-        <md-filled-button id="test">Test</md-filled-button>
+        <md-tabs id="tabs">
+            <md-primary-tab>
+                <i class="material-icons" slot="icon">home</i>
+                Home
+            </md-primary-tab>
+            <md-primary-tab>
+                <i class="material-icons" slot="icon">edit</i>
+                Create
+            </md-primary-tab>
+            <md-primary-tab>
+                <i class="material-icons" slot="icon">preview</i>
+                View
+            </md-primary-tab>
+            <md-primary-tab>
+                <i class="material-icons" slot="icon">settings</i>
+                Settings
+            </md-primary-tab>
+            <md-primary-tab>
+                <i class="material-icons" slot="icon">info</i>
+                About
+            </md-primary-tab>
+        </md-tabs>
+        <div id="iframes">
+            <iframe id="page-left"></iframe>
+            <iframe src="pages/home/index.html" id="page"></iframe>
+            <iframe id="page-right"></iframe>
+        </div>
     </body>
 </html>

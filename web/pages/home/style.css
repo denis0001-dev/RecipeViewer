@@ -1,0 +1,31 @@
+body {
+    overflow: auto;
+}
+
+.background {
+    background-size: cover;
+    background-image: none;
+    /* temporary */
+    background-color: azure; 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.main {
+    width: 70%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+}
