@@ -16,7 +16,7 @@ public class App extends Application {
         // Store the data in the static field so it can be accessed from anywhere
         primaryStage = stage;
         instance = this;
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("app-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/app-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 670, 490);
         // Some settings
         stage.setMaxHeight(scene.getHeight());

@@ -1,1 +1,1 @@
-s/\s*<descriptorRefs>\s*<descriptorRef>(.*)<\/descriptorRef>\s*<\/descriptorRefs>/\1/
+ru
