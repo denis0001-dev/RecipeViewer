@@ -6,7 +6,7 @@ body {
     background-size: cover;
     background-image: none;
     /* temporary */
-    background-color: azure; 
+    background-color: #c9e3e3;
 
     display: flex;
     flex-direction: column;
@@ -28,4 +28,32 @@ body {
     padding: 10px;
     background-color: rgb(245, 245, 245);
     border-radius: 10px;
+    transition: margin-top, margin-bottom, width 0.25s ease-in-out;
+}
+
+/* .buttons {
+    transition: flex-direction 0.5s ease-in-out; // doesn't work
+    transition: transform 0.5s ease-in-out;
+}
+
+md-filled-button {
+    transition: transform 0.5s ease-in-out;
+} */
+
+@media (max-width: 515px) {
+    .main {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 350px) {
+    .buttons {
+        flex-direction: column;
+
+        /* md-filled-button {
+            transform: translateY(100%);
+        } */
+    }
 }

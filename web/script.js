@@ -21,8 +21,8 @@ function root_page() {
         async function animateChange() {
             iframe.src = url;
             iframes.style.animation = "none";
-            iframe.style.animation = "appear 0.5s ease-in-out";
-            await delay(500);
+            iframe.style.animation = "appear 1s ease-in-out";
+            await delay(1000);
             iframe.style.opacity = '1';
             iframe.style.animation = "none";
         }
