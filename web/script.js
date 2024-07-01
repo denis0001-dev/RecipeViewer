@@ -16,7 +16,7 @@ function root_page() {
 
     async function setPage(page) {
         /* iframe.src = `pages/${page}/index.html`; */
-        const url = `pages/${page}/index.html`;
+        const url = `${page}/index.html`;
 
         async function animateChange() {
             iframe.src = url;
