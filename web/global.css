@@ -1,7 +1,13 @@
 @import url('google-sans/stylesheet.css');
 
-* {
-    font-family: 'Google Sans', Roboto, 'Open Sans', Helvetica, sans-serif, system-ui;
+:root {
+    --font: 'Google Sans', Roboto, 'Open Sans', Helvetica, system-ui;
+    --md-sys-typescale-body-large-font: var(--font);
+    --md-sys-typescale-body-small-font: var(--font);
+}
+
+*, *:before, *:after, *::placeholder {
+    font-family: var(--font), sans-serif;
 }
 
 html, body {
@@ -16,4 +22,10 @@ html, body {
 
 iframe {
     border: none;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
