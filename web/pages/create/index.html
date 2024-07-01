@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="../../global.css"/>
         <script src="script.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script src="../../global.js"></script>
 
         <!-- Redirect to homepage -->
         <script src="../../redirect.js"></script>
@@ -42,7 +43,12 @@
     <body>
         <main>
             <div id="top">
-                <md-outlined-text-field label="Recipe Name" placeholder="Example" maxlength="20"></md-outlined-text-field>
+                <md-outlined-text-field id="recipeName"
+                                        label="Recipe Name"
+                                        placeholder="Example"
+                                        maxlength="20"
+                                        suffix-text=".json"
+                ></md-outlined-text-field>
                 <div class="buttons">
                     <md-filled-tonal-button id="clear">
                         Clear

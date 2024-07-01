@@ -16,3 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function delay(millis) {
     return new Promise(resolve => setTimeout(resolve, millis));
 }
+
+async function dataUrlToString(dataURL) {
+    const res = await fetch(dataURL);
+    return new TextDecoder().decode(new Uint8Array(await res.arrayBuffer()));
+}
