@@ -104,4 +104,26 @@ function root_page() {
         // noinspection JSUnresolvedReference
         prevIndex = event.target.activeTabIndex;
     })
+
+    // Parse URL params
+    const params = new URLSearchParams(location.search);
+    for (const [key, value] of params) {
+        if (key === "page") {
+            const page = value.toLowerCase();
+            setTimeout(() => {
+                if (page === "home") {
+                    switchTab(0);
+                } else if (page === "create") {
+                    switchTab(1);
+                } else if (page === "view") {
+                    switchTab(2);
+                } else if (page === "settings") {
+                    switchTab(3);
+                } else if (page === "about") {
+                    switchTab(4);
+                }
+            }, 500);
+
+        }
+    }
 }

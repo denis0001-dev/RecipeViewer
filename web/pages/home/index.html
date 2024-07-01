@@ -11,6 +11,9 @@
         <script src="script.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
+        <!-- Redirect to homepage -->
+        <script src="../../redirect.js"></script>
+
         <!-- Material Design -->
         <link rel="stylesheet" href="../../google-sans/stylesheet.css"/>
         <script type="importmap">
@@ -21,8 +24,7 @@
             }
         </script>
         <script type="module">
-            import '@material/web/all.js';
-            // noinspection JSFileReferences,NpmUsedModulesInstalled
+            import '@material/web/all.js'; // noinspection JSFileReferences,NpmUsedModulesInstalled
             import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
 
             document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
