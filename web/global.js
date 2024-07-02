@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
         allow-popups-to-escape-sandbox \
         allow-same-origin \
         allow-scripts \
-        allow-top-navigation";
+        allow-top-navigation \
+        allow-downloads";
     })
 })
 

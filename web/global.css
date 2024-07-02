@@ -8,6 +8,7 @@
 
 *, *:before, *:after, *::placeholder {
     font-family: var(--font), sans-serif;
+    animation-fill-mode: forwards !important;
 }
 
 html, body {
