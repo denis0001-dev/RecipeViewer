@@ -34,7 +34,7 @@ function main() {
     document.body.onbeforeunload = () => "";
 
     function checkRecipeName() {
-        const regex = /^(\w|_|-| |\.){1,20}$/m;
+        const regex = /^([\w_\-.]|[а-я]){1,20}$/m;
 
         let result;
         if ((result = regex.exec(recipeName.value)) === null) {
@@ -170,12 +170,14 @@ function main() {
         ingName.id = `ing${ingNumber}_name`;
         ingName.classList.add("name");
         ingName.value = name;
+        ingName.placeholder = "Name";
         root.appendChild(ingName);
 
         const ingCount = document.createElement("md-filled-text-field");
         ingCount.id = `ing${ingNumber}_count`;
         ingCount.classList.add("count");
         ingCount.value = count;
+        ingCount.placeholder = "Count";
 
         function validateNumber() {
             const regex = /^[123456789]+$/m
@@ -205,6 +207,7 @@ function main() {
         ingUnit.id = `ing${ingNumber}_unit`;
         ingUnit.classList.add("unit");
         ingUnit.value = unit;
+        ingUnit.placeholder = "Unit";
         root.appendChild(ingUnit);
 
         const remove = document.createElement("md-filled-icon-button");
@@ -253,6 +256,7 @@ function main() {
         stepDesc.id = `step${stepNumber}_desc`;
         stepDesc.classList.add("desc");
         stepDesc.value = desc;
+        stepDesc.placeholder = "Describe your step";
         root.appendChild(stepDesc);
 
         const remove = document.createElement("md-filled-icon-button");
