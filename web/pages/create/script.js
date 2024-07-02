@@ -82,6 +82,9 @@ function main() {
                 ingredientsList.forEach(item => {
                     item.remove();
                 });
+                stepsList.forEach(item => {
+                    item.remove();
+                })
 
                 // Parse ingredients
 
