@@ -15,7 +15,6 @@ main {
     display: flex;
     align-items: flex-start;
     gap: 5px;
-    position: relative;
     width: 100%;
     height: 56px;
 
@@ -81,6 +80,62 @@ main {
             bottom: 10px;
             right: 10px;
             z-index: 2;
+        }
+    }
+}
+
+@media (max-width: 580px) {
+    body {
+        padding: 0 !important;
+        height: 100vh !important;
+        width: 100% !important;
+    }
+
+    #top {
+        z-index: 99;
+        position: sticky;
+        background-color: white;
+        padding: 10px 10px 25px;
+        width: calc(100% - 10px*2);
+        top: 0;
+        left: 0;
+        /* height: calc(100% - 10px*2); */
+    }
+
+    /* #top::after {
+        content: "";
+        position: absolute;
+        bottom: -30px;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background-color: inherit;
+        z-index: 98;
+    } */
+
+    #items {
+        margin: auto 10px;
+        flex-direction: column;
+        height: 140%;
+
+        > div {
+            width: 100%;
+        }
+    }
+
+    #create {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+    #top {
+        flex-direction: column;
+        height: revert !important;
+        padding: 10px;
+
+        md-outlined-text-field {
+            width: 100%;
         }
     }
 }
