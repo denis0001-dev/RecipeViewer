@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
@@ -31,13 +29,37 @@ function main() {
     const ingredientsList = [];
     const stepsList = [];
 
-    document.body.onbeforeunload = () => "";
+    document.body.onbeforeunload = () => {
+        recipeJSON = createJSON(false);
+        parent.savedCreateState = {
+            name: recipeName.value,
+            recipe: recipeJSON
+        };
+        if (parent.savedCreateState !== {
+            name: "",
+            recipe: {
+                ingredients: [],
+                steps: []
+            }
+        } && !parent.switching) {
+            return "";
+        }
+        return undefined;
+    };
+
+    if (parent.savedCreateState.recipe !== undefined) {
+        let name = parent.savedCreateState.name;
+        if (name === undefined) {
+            name = "";
+        }
+        recipeName.value = name;
+        recipeJSON = parent.savedCreateState.recipe;
+        parseJSON(recipeJSON);
+    }
 
     function checkRecipeName() {
         const regex = /^([\w_\-.]|[а-я]){1,20}$/m;
-
-        let result;
-        if ((result = regex.exec(recipeName.value)) === null) {
+        if ((regex.exec(recipeName.value)) === null) {
             recipeName.error = true;
             recipeName.errorText = "Don't use special characters";
 
@@ -77,46 +99,115 @@ function main() {
                     alert("Invalid file type. Please upload a JSON file.");
                     return;
                 }
-                recipeName.value = name.substring(0, name.lastIndexOf("."));
-                recipeJSON = JSON.parse(json);
-                ingredientsList.forEach(item => {
-                    item.remove();
-                });
-                stepsList.forEach(item => {
-                    item.remove();
-                })
-
-                // Parse ingredients
-
-                // noinspection JSUnresolvedReference
-                const ings = recipeJSON.ingredients;
-
-                ings.forEach(ing => {
-                    const count = ing.count;
-                    const name = ing.name;
-                    // noinspection JSUnresolvedReference
-                    const unit = ing.count2;
-
-                    addIngredient(name, count, unit);
-                });
-                // Parse steps
-
-                // noinspection JSUnresolvedReference
-                const steps = recipeJSON.steps;
-
-                steps.forEach(step => {
-                    const desc = step[`step${steps.indexOf(step) + 1}`];
-
-                    if (desc === undefined) {
-                        console.warn("No step description found for step "+(steps.indexOf(step) + 1));
-                        return;
-                    }
-                    addStepFunc(desc);
-                })
+                loadJSON(name, json);
             }
         }
         input.click();
     })
+
+    function loadJSON(name, json) {
+        recipeName.value = name.substring(0, name.lastIndexOf("."));
+        recipeJSON = JSON.parse(json);
+        parseJSON(recipeJSON);
+    }
+
+    function parseJSON(recipeJSON) {
+        ingredientsList.forEach(item => {
+            item.remove();
+        });
+        stepsList.forEach(item => {
+            item.remove();
+        })
+
+        // Parse ingredients
+
+        // noinspection JSUnresolvedReference
+        const ings = recipeJSON.ingredients;
+
+        ings.forEach(ing => {
+            const count = ing.count;
+            const name = ing.name;
+            // noinspection JSUnresolvedReference
+            const unit = ing.count2;
+
+            addIngredient(name, count, unit);
+        });
+        // Parse steps
+
+        // noinspection JSUnresolvedReference
+        const steps = recipeJSON.steps;
+
+        steps.forEach(step => {
+            const desc = step[`step${steps.indexOf(step) + 1}`];
+
+            if (desc === undefined) {
+                console.warn("No step description found for step "+(steps.indexOf(step) + 1));
+                return;
+            }
+            addStepFunc(desc);
+        })
+    }
+
+    function createJSON(errCheck = true) {
+        const recipe = {};
+
+        const ingredients = [];
+        const steps = [];
+
+        let error = false;
+
+        recipeName.dispatchEvent(new Event("input"));
+
+        if (recipeName.error) {
+            error = true;
+        }
+
+        ingredientsList.forEach(ing => {
+            const ingredient = {};
+
+            for (let i = 0; i < ing.element.children.length; i++) {
+                const item = ing.element.children[i];
+                item.dispatchEvent(new Event("input"));
+                if (item.error !== undefined && !error) {
+                    error = item.error;
+                }
+            }
+
+            ingredient.name = ing.name;
+            ingredient.count = ing.count;
+            ingredient.count2 = ing.unit;
+
+            ingredients.push(ingredient);
+        });
+
+        stepsList.forEach(stepItem => {
+            const step = {};
+            for (let i = 0; i < stepItem.element.children.length; i++) {
+                const item = stepItem.element.children[i];
+                item.dispatchEvent(new Event("input"));
+                if (item.error !== undefined && !error) {
+                    error = item.error;
+                }
+            }
+
+            step[`step${stepsList.indexOf(stepItem) + 1}`] = stepItem.desc;
+
+            steps.push(step);
+        });
+
+        if (error && errCheck) {
+            /* createFailDialog.open = true;
+            failClose.addEventListener("click", () => {
+                createFailDialog.close();
+            }) */
+            return null;
+        }
+
+        recipe.ingredients = ingredients;
+        recipe.steps = steps;
+
+        return recipe;
+    }
 
     clear.addEventListener("click", () => {
         recipeName.value = "";
@@ -184,9 +275,7 @@ function main() {
 
         function validateNumber() {
             const regex = /^[123456789]+$/m
-
-            let result;
-            if ((result = regex.exec(ingCount.value)) === null) {
+            if ((regex.exec(ingCount.value)) === null) {
                 ingCount.error = true;
                 ingCount.errorText = "Must be a number";
 
@@ -310,62 +399,13 @@ function main() {
     });
 
     create.addEventListener("click", () => {
-        const recipe = {};
-
-        const ingredients = [];
-        const steps = [];
-
-        let error = false;
-
-        recipeName.dispatchEvent(new Event("input"));
-
-        if (recipeName.error) {
-            error = true;
-        }
-
-        ingredientsList.forEach(ing => {
-            const ingredient = {};
-
-            for (let i = 0; i < ing.element.children.length; i++) {
-                const item = ing.element.children[i];
-                item.dispatchEvent(new Event("input"));
-                if (item.error !== undefined && !error) {
-                    error = item.error;
-                }
-            }
-
-            ingredient.name = ing.name;
-            ingredient.count = ing.count;
-            ingredient.count2 = ing.unit;
-
-            ingredients.push(ingredient);
-        });
-
-        stepsList.forEach(stepItem => {
-            const step = {};
-            for (let i = 0; i < stepItem.element.children.length; i++) {
-                const item = stepItem.element.children[i];
-                item.dispatchEvent(new Event("input"));
-                if (item.error !== undefined && !error) {
-                    error = item.error;
-                }
-            }
-
-            step[`step${stepsList.indexOf(stepItem) + 1}`] = stepItem.desc;
-
-            steps.push(step);
-        });
-
-        if (error) {
+        const recipe = createJSON();
+        if (recipe === null) {
             createFailDialog.open = true;
             failClose.addEventListener("click", () => {
                 createFailDialog.close();
-            })
-            return;
+            });
         }
-
-        recipe.ingredients = ingredients;
-        recipe.steps = steps;
 
         const recipeJson = JSON.stringify(recipe, null, 2);
 

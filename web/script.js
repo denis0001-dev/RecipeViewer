@@ -2,6 +2,23 @@
 
 document.addEventListener("DOMContentLoaded", root_page);
 
+var savedCreateState = {
+    name: undefined,
+    recipe: undefined
+}
+
+var unsavedChanges = false;
+
+document.onbeforeunload = () => {
+    if (unsavedChanges) {
+        return "";
+    } else {
+        return undefined;
+    }
+}
+
+var switching = false;
+
 function root_page() {
     const tabs = document.getElementById("tabs");
 
@@ -15,6 +32,7 @@ function root_page() {
     let currentIndex = -1;
 
     async function setPage(page) {
+        switching = true;
         /* iframe.src = `pages/${page}/index.html`; */
         const url = `pages/${page}/index.html`;
 
@@ -45,7 +63,7 @@ function root_page() {
 
             iframe = document.getElementById("page");
             iframe_right = document.getElementById("page-right");
-            animateChange();
+            await animateChange();
         }
         // Left
         else if (currentIndex < prevIndex) {
@@ -60,13 +78,14 @@ function root_page() {
 
             iframe = document.getElementById("page");
             iframe_left = document.getElementById("page-left");
-            animateChange();
+            await animateChange();
         }
         // Current
         else if (iframe.src !== url) {
             iframe.src = url;
         }
         clearURLs();
+        switching = false;
     }
 
     async function switchTab(tabIndex) {
