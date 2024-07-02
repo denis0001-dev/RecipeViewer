@@ -405,6 +405,7 @@ function main() {
             failClose.addEventListener("click", () => {
                 createFailDialog.close();
             });
+            return;
         }
 
         const recipeJson = JSON.stringify(recipe, null, 2);
