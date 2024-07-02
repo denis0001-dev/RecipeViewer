@@ -117,6 +117,12 @@ function main() {
 
     clear.addEventListener("click", () => {
         recipeName.value = "";
+        ingredientsList.forEach(item => {
+            item.remove();
+        });
+        stepsList.forEach(item => {
+            item.remove();
+        });
     })
 
     function adjustIngAddButtonPos() {
