@@ -12,6 +12,7 @@
         <script src="script.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
         <script src="../../global.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
         <!-- Redirect to homepage -->
         <script src="../../redirect.js"></script>
@@ -128,25 +129,46 @@
                 <pre id="finishedRecipeCode"></pre>
             </div>
             <div slot="actions">
-                <md-filled-tonal-button id="finishedClose" value="close">
-                    Close
-                    <svg
-                            slot="icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 -960 960 960">
-                        <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
-                    </svg>
-                </md-filled-tonal-button>
-                <md-filled-button id="finishedCopy" value="copy">
-                    Copy
-                    <svg
-                            slot="icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 -960 960 960">
-                        <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
-                    </svg>
-                </md-filled-button>
-                <md-filled-button id="finishedDownload" value="download">
+                <div class="computer">
+                    <md-filled-tonal-button class="finishedClose" value="close">
+                        Close
+                        <svg
+                                slot="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </md-filled-tonal-button>
+                    <md-filled-button class="finishedCopy" value="copy">
+                        Copy
+                        <svg
+                                slot="icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 -960 960 960">
+                            <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+                        </svg>
+                    </md-filled-button>
+                </div>
+                <div class="phone">
+                    <md-filled-tonal-icon-button class="finishedClose" value="close">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 -960 960 960">
+                            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                        </svg>
+                    </md-filled-tonal-icon-button>
+                    <md-filled-icon-button class="finishedCopy">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 -960 960 960"
+                                fill="#ffffff"
+                        >
+                            <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
+                        </svg>
+                    </md-filled-icon-button>
+                </div>
+
+                <md-filled-button class="finishedDownload" value="download">
                     Download as JSON
                     <svg
                             slot="icon"

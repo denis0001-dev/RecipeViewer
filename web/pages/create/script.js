@@ -16,9 +16,9 @@ function main() {
     const create = document.getElementById("create");
 
     const finishedDialog = document.getElementById("createFinished");
-    const finishedClose = document.getElementById("finishedClose");
-    const finishedCopy = document.getElementById("finishedCopy");
-    const finishedDownload = document.getElementById("finishedDownload");
+    const finishedClose = $(".finishedClose");
+    const finishedCopy = $(".finishedCopy");
+    const finishedDownload = $(".finishedDownload");
     const finishedCode = document.getElementById("finishedRecipeCode");
 
     const createFailDialog = document.getElementById("createFail");
@@ -446,16 +446,16 @@ function main() {
             }
         });
 
-        finishedClose.addEventListener("click", () => {
-            finishedDialog.close();
+        finishedClose.click(async () => {
+            await finishedDialog.close();
         });
-        finishedCopy.addEventListener("click", () => {
+        finishedCopy.click(async () => {
             finishedDialog.returnValue = "copy";
-            finishedDialog.close();
+            await finishedDialog.close();
         });
-        finishedDownload.addEventListener("click", () => {
+        finishedDownload.click(async () => {
             finishedDialog.returnValue = "download";
-            finishedDialog.close();
+            await finishedDialog.close();
         });
     })
 }

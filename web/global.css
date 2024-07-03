@@ -30,3 +30,21 @@ iframe {
     align-items: center;
     gap: 5px;
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        --md-sys-color-surface: #010800;
+        --md-sys-color-on-surface: #e2e4df;
+        --md-sys-color-on-surface-variant: #b6bab0;
+        /* --md-sys-color-primary: #9973ff; */
+        --md-dialog-container-color: #1d1d1d;
+        --md-sys-color-secondary-container: #494967;
+        --md-sys-color-on-secondary-container: white;
+        --md-sys-color-error: #e61d11;
+        --md-sys-color-surface-container-high: #1a1a1a;
+        --md-list-container-color: #080808;
+        background-color: black;
+        color: white;
+        color-scheme: dark;
+    }
+}
