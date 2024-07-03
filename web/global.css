@@ -9,6 +9,10 @@
 *, *:before, *:after, *::placeholder {
     font-family: var(--font), sans-serif;
     animation-fill-mode: forwards !important;
+    /* transition-duration: 1s, 1s !important;
+    transition-property: background-color, color !important;
+    transition-timing-function: ease-in-out, ease-in-out !important; */
+    box-sizing: border-box;
 }
 
 html, body {

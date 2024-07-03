@@ -1,7 +1,7 @@
 body {
     padding: 10px !important;
-    height: calc(100vh - 10px*2) !important;
-    width: calc(100vw - 10px*2) !important;
+    /* height: calc(100vh - 10px*2) !important;
+    width: calc(100vw - 10px*2) !important; */
 }
 
 main {
@@ -51,7 +51,7 @@ main {
             overflow-x: hidden;
 
             > md-list {
-                height: calc(100% - 8px*2);
+                height: 100%;
                 width: 100%;
 
                 .root {

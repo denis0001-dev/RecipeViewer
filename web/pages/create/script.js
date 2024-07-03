@@ -16,16 +16,18 @@ function main() {
     const create = document.getElementById("create");
 
     const finishedDialog = document.getElementById("createFinished");
-    const finishedClose = $(".finishedClose");
-    const finishedCopy = $(".finishedCopy");
-    const finishedDownload = $(".finishedDownload");
+    const finishedClose = document.querySelectorAll(".finishedClose");
+    const finishedCopy = document.querySelectorAll(".finishedCopy");
+    const finishedDownload = document.querySelectorAll(".finishedDownload");
     const finishedCode = document.getElementById("finishedRecipeCode");
 
     const createFailDialog = document.getElementById("createFail");
     const failClose = document.getElementById("failClose");
 
-    let recipeJSON = JSON.parse("{}");
-
+    let recipeJSON = {
+        ingredients: [],
+        steps: []
+    };
     const ingredientsList = [];
     const stepsList = [];
 
@@ -404,7 +406,7 @@ function main() {
             createFailDialog.open = true;
             failClose.addEventListener("click", () => {
                 createFailDialog.close();
-            });
+            }, {once: true});
             return;
         }
 
@@ -444,22 +446,33 @@ function main() {
                     URL.revokeObjectURL(url);
                 }, 0);
             }
+            finishedDialog.returnValue = undefined;
+            /* finishedClose.click(undefined);
+            finishedCopy.click(undefined);
+            finishedDownload.click(undefined); */
         });
 
-        finishedClose.click(async () => {
-            await finishedDialog.close();
+        finishedClose.forEach(item => {
+            item.addEventListener("click", async () => {
+                await finishedDialog.close();
+            }, {once: true});
         });
-        finishedCopy.click(async () => {
-            finishedDialog.returnValue = "copy";
-            await finishedDialog.close();
+        finishedCopy.forEach(item => {
+            item.addEventListener("click", async () => {
+                finishedDialog.returnValue = "copy";
+                await finishedDialog.close();
+            }, {once: true});
         });
-        finishedDownload.click(async () => {
-            finishedDialog.returnValue = "download";
-            await finishedDialog.close();
+        finishedDownload.forEach(item => {
+            item.addEventListener("click", async () => {
+                finishedDialog.returnValue = "download";
+                await finishedDialog.close();
+            }, {once: true});
         });
     })
 }
 
+// noinspection JSUnusedGlobalSymbols
 class Ingredient {
     element;
 
@@ -536,6 +549,7 @@ class Ingredient {
     async remove() {}
 }
 
+// noinspection JSUnusedGlobalSymbols
 class Step {
     element;
 
