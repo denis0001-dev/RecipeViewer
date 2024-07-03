@@ -131,11 +131,13 @@ main {
 .computer {
     display: flex;
     flex-direction: row;
+    gap: inherit;
 }
 
 .phone {
     display: none;
     flex-direction: row;
+    gap: inherit;
 }
 
 @media (max-width: 510px) {
@@ -176,6 +178,13 @@ main {
         height: 300px;
     }
 
+}
+
+@media (prefers-color-scheme: dark) {
+    #createFinished #finishedRecipeCode {
+        background-color: #292929;
+        color: white;
+    }
 }
 
 @keyframes itemAppear {

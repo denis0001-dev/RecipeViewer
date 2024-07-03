@@ -41,8 +41,9 @@ iframe {
         --md-sys-color-secondary-container: #494967;
         --md-sys-color-on-secondary-container: white;
         --md-sys-color-error: #e61d11;
-        --md-sys-color-surface-container-high: #1a1a1a;
+        --md-sys-color-surface-container-high: #1f1f1f;
         --md-list-container-color: #080808;
+        --md-sys-color-surface-container-highest: #1c1c1c;
         background-color: black;
         color: white;
         color-scheme: dark;
