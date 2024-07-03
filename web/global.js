@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         allow-top-navigation \
         allow-downloads";
     })
-})
+});
 
 function delay(millis) {
     return new Promise(resolve => setTimeout(resolve, millis));

@@ -13,6 +13,7 @@
     transition-property: background-color, color !important;
     transition-timing-function: ease-in-out, ease-in-out !important; */
     box-sizing: border-box;
+    resize: none;
 }
 
 html, body {
