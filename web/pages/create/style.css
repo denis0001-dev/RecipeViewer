@@ -23,6 +23,10 @@ main {
     }
 }
 
+main, #top {
+    background-color: inherit;
+}
+
 
 #items {
     display: flex;
@@ -94,11 +98,11 @@ main {
     #top {
         z-index: 99;
         position: sticky;
-        background-color: white;
         padding: 10px 10px 25px;
         width: calc(100% - 10px*2);
         top: 0;
         left: 0;
+        box-sizing: revert;
         /* height: calc(100% - 10px*2); */
     }
 

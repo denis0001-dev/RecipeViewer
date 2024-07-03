@@ -469,7 +469,7 @@ function main() {
                 await finishedDialog.close();
             }, {once: true});
         });
-    })
+    });
 }
 
 // noinspection JSUnusedGlobalSymbols
