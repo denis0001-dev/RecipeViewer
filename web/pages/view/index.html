@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="style.css"/>
         <link rel="stylesheet" href="../../global.css"/>
         <script src="script.js"></script>
+        <script src="../../global.js"></script>
         <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
         <!-- Redirect to homepage -->
@@ -45,17 +46,63 @@
                 <md-filled-text-field
                         id="recipeName"
                         label="Recipe Name"
-                        placeholder="Example"
                         readOnly
-                        suffix-text=".json"
-                        maxlength="20">
+                        suffix-text=".json">
                 </md-filled-text-field>
+                <md-filled-text-field
+                        id="multiplier"
+                        label="Multiplier"
+                        prefix-text="x"
+                        value="1"
+                ></md-filled-text-field>
                 <md-filled-button id="load">
                     Choose file
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
                         <path d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/>
                     </svg>
                 </md-filled-button>
+            </div>
+            <div id="items">
+                <div id="ingredients">
+                    <h2>Ingredients</h2>
+                    <div class="scroll">
+                        <md-list>
+                            <!--
+                            <md-list-item>
+                                <span slot="start">#1</span>
+                                <div class="root">
+                                    <md-filled-text-field id="ing1_name" class="name"></md-filled-text-field>
+                                    <md-filled-text-field id="ing1_count" class="count"></md-filled-text-field>
+                                    <md-filled-text-field id="ing1_unit" class="unit"></md-filled-text-field>
+                                </div>
+                            </md-list-item>
+                            -->
+                        </md-list>
+                    </div>
+                </div>
+                <div id="steps">
+                    <h2>Steps</h2>
+                    <div id="stepScrl">
+                        <div id="steps-wrapper">
+                            <div id="step_left" class="step">
+                                <h1>Step #1</h1>
+                                <p>Test eteryt eterat awertwjdui tuiawet aertraeuyt</p>
+                            </div>
+                            <div id="step" class="step">
+                                <h1>Step #1</h1>
+                                <p>wesrf kwrfodqwekorfiwj iortewofgjeowrjftWKEFEW[PFG</p>
+                            </div>
+                            <div id="step_right" class="step">
+                                <h1>Step #2</h1>
+                                <p>rtjrsewakwerowa90ria90e90awrtraektfsg-0tp-g</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="nav">
+                        <md-outlined-button id="prev" disabled>Previous</md-outlined-button>
+                        <md-filled-button id="next" disabled>Next</md-filled-button>
+                    </div>
+                </div>
             </div>
         </main>
     </body>

@@ -93,14 +93,9 @@ function main() {
 
             reader.onload = async e => {
                 const content = e.target.result;
-                console.log("Reading file: "+file.name);
-                const json = await dataUrlToString(content);
-                console.log(json);
-                // Parse
-                if (!(type === "application/json" || name.endsWith(".json"))) {
-                    alert("Invalid file type. Please upload a JSON file.");
-                    return;
-                }
+                const json = await processJSONFile(file, content);
+                if (json == null) return;
+
                 loadJSON(name, json);
             }
         }

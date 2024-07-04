@@ -1,0 +1,139 @@
+body {
+    padding: 10px !important;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 56px;
+    width: 100%;
+    gap: 8px;
+
+    md-filled-text-field {
+        align-self: flex-start;
+    }
+    flex-shrink: 1;
+}
+
+#items {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    gap: 10px;
+
+    div {
+        width: 50%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        div {
+            width: 100%;
+        }
+    }
+
+    #ingredients {
+        height: 100%;
+
+        h2 {
+            flex-shrink: 1;
+        }
+
+        .scroll {
+            overflow-y: scroll;
+            width: 100%;
+            /* height: 100%; */
+            flex: 1;
+
+            md-list {
+                height: 100%;
+                width: 100%;
+
+                md-list-item .root {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 5px;
+
+                    md-filled-text-field {
+                        flex: 1;
+                        height: 48px;
+                    }
+
+                    md-filled-text-field.name {
+                        flex: 3;
+                    }
+                }
+            }
+        }
+    }
+
+    #steps {
+        #stepScrl {
+            position: relative;
+            flex: 1;
+            overflow: hidden !important;
+
+            #steps-wrapper {
+                width: 100%;
+                height: 100%;
+
+                #step_left {
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                }
+
+                #step_right {
+                    position: absolute;
+                    top: 0;
+                    right: -100%;
+                }
+
+                .step {
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                }
+            }
+        }
+
+        #nav {
+            display: flex;
+            flex-direction: row;
+            flex-shrink: 1;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    }
+}
+
+@keyframes stepSlideLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes stepSlideRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

@@ -55,3 +55,30 @@ iframe {
         color-scheme: dark;
     }
 }
+
+@keyframes itemAppear {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes itemDisappear {
+    0% {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+        height: 72px;
+    }
+
+
+    100% {
+        transform: translateX(-100%) /* translateY(calc(72px / 2)) */;
+        opacity: 0;
+        height: 0;
+    }
+}
