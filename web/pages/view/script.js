@@ -27,16 +27,16 @@ function main() {
         } else {
             multiply = Number(multiplier.value);
             multiplier.error = false;
-            console.log(step_center.querySelector("p").textContent);
+            // console.log(step_center.querySelector("p").textContent);
             let processedText;
             try {
                 processedText = processRecipeText(recipe.steps[currentStep - 1]['step'+currentStep]);
             } catch (_) {
                 processedText = step_center.querySelector("p").textContent;
             }
-            console.log(processedText);
+            // console.log(processedText);
             step_center.querySelector("p").textContent = processedText;
-            console.log(step_center.querySelector("p").textContent);
+            // console.log(step_center.querySelector("p").textContent);
         }
     }
 
