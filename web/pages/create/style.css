@@ -172,16 +172,8 @@ main, #top {
 
 #createFinished {
     #finishedRecipeCode {
-        margin: 10px;
-        background-color: #cacaca;
-        border-radius: 5px;
-        padding: 5px;
-        color: #1c1c1c;
-        font-family: monospace;
-        overflow: auto !important;
         height: 300px;
     }
-
 }
 
 @media (prefers-color-scheme: dark) {

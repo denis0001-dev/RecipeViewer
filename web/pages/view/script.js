@@ -44,6 +44,7 @@ function main() {
     function updateIngredients() {
 
         Array.from(ingredients.children).forEach(item => {
+            if (item instanceof HTMLParagraphElement) return;
             const count = item.querySelector(".root md-filled-text-field.count");
             const number = Number(item.querySelector("span[slot='start']").textContent.replace("#", ""));
 
