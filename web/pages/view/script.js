@@ -37,7 +37,20 @@ function main() {
             // console.log(processedText);
             step_center.querySelector("p").textContent = processedText;
             // console.log(step_center.querySelector("p").textContent);
+            updateIngredients();
         }
+    }
+
+    function updateIngredients() {
+
+        Array.from(ingredients.children).forEach(item => {
+            const count = item.querySelector(".root md-filled-text-field.count");
+            const number = Number(item.querySelector("span[slot='start']").textContent.replace("#", ""));
+
+            const originalCount = recipe.ingredients[number - 1].count;
+
+            count.value = originalCount * multiply;
+        });
     }
 
     multiplier.addEventListener("input", checkMultiplier);

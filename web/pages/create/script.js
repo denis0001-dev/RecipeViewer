@@ -49,6 +49,24 @@ function main() {
         return undefined;
     };
 
+    function inputListener(element, func, ...params) {
+        if (!element instanceof HTMLElement) {
+            throw new TypeError("Element must be a valid DOM element");
+        } else if (!(func instanceof Function || typeof func === "function")) {
+            throw new TypeError("Function must be valid");
+        }
+
+        params = params === undefined ? [] : params;
+
+        function callback() {
+            func(...params);
+        }
+
+        element.addEventListener("input", callback);
+        element.addEventListener("change", callback);
+        element.addEventListener("click", callback);
+    }
+
     if (parent.savedCreateState.recipe !== undefined) {
         let name = parent.savedCreateState.name;
         if (name === undefined) {
@@ -60,10 +78,10 @@ function main() {
     }
 
     function checkRecipeName() {
-        const regex = /^([\w_\-.]|[а-я]){1,20}$/m;
+        const regex = /^(?!CON|PRN|AUX|NUL|(COM|LPT)([0123456789¹²³]))[^/\\><|:&?*\u2400]{1,255}$/i;
         if ((regex.exec(recipeName.value)) === null) {
             recipeName.error = true;
-            recipeName.errorText = "Don't use special characters";
+            recipeName.errorText = "Don't use restricted characters";
 
             if (recipeName.value === "") {
                 recipeName.errorText = "Recipe name shouldn't be empty";
@@ -74,10 +92,7 @@ function main() {
         }
     }
 
-    recipeName.addEventListener("input", checkRecipeName);
-    recipeName.addEventListener("change", checkRecipeName);
-    recipeName.addEventListener("click", checkRecipeName);
-    recipeName.addEventListener("DOMContentLoaded", checkRecipeName);
+    inputListener(recipeName, checkRecipeName);
 
     load.addEventListener("click", () => {
         const input = document.createElement("input");
@@ -243,6 +258,10 @@ function main() {
     adjustIngAddButtonPos();
     adjustStepAddButtonPos();
 
+    function isNotEmpty(field) {
+        field.error = field.value === "";
+    }
+
     async function addIngredient(name, count, unit) {
         const list = ingScroll.getElementsByTagName("md-list")[0];
 
@@ -262,6 +281,7 @@ function main() {
         ingName.classList.add("name");
         ingName.value = name;
         ingName.placeholder = "Name";
+        inputListener(ingName, isNotEmpty, ingName);
         root.appendChild(ingName);
 
         const ingCount = document.createElement("md-filled-text-field");
@@ -271,8 +291,8 @@ function main() {
         ingCount.placeholder = "Count";
 
         function validateNumber() {
-            const regex = /^[123456789]+$/m
-            if ((regex.exec(ingCount.value)) === null) {
+            // const regex = /^[123456789]+$/m
+            if (isNaN(Number(ingCount.value)) || Number(ingCount.value) === 0) {
                 ingCount.error = true;
                 ingCount.errorText = "Must be a number";
 
@@ -286,9 +306,7 @@ function main() {
                 ingCount.errorText = undefined;
             }
         }
-        ingCount.addEventListener("input", validateNumber);
-        ingCount.addEventListener("change", validateNumber);
-        ingCount.addEventListener("click", validateNumber);
+        inputListener(ingCount, validateNumber);
 
         root.appendChild(ingCount);
 
@@ -297,6 +315,7 @@ function main() {
         ingUnit.classList.add("unit");
         ingUnit.value = unit;
         ingUnit.placeholder = "Unit";
+        inputListener(ingUnit, isNotEmpty, ingUnit);
         root.appendChild(ingUnit);
 
         const remove = document.createElement("md-filled-icon-button");
@@ -346,6 +365,7 @@ function main() {
         stepDesc.classList.add("desc");
         stepDesc.value = desc;
         stepDesc.placeholder = "Describe your step";
+        inputListener(stepDesc, isNotEmpty, stepDesc);
         root.appendChild(stepDesc);
 
         const remove = document.createElement("md-filled-icon-button");
@@ -397,7 +417,7 @@ function main() {
 
     create.addEventListener("click", () => {
         const recipe = createJSON();
-        if (recipe === null) {
+        if (recipe === null || ingredientsList.length === 0 || stepsList.length === 0) {
             createFailDialog.open = true;
             failClose.addEventListener("click", () => {
                 createFailDialog.close();
