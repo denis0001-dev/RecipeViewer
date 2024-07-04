@@ -7,6 +7,7 @@ main {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    background-color: inherit;
 }
 
 #top {
@@ -114,6 +115,47 @@ main {
             flex-shrink: 1;
             justify-content: space-between;
             margin-top: 10px;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 0 !important;
+    }
+
+    main {
+        height: 170%;
+    }
+
+    #top {
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        background-color: inherit;
+        width: calc(100vw - 10px*2);
+        padding: 10px;
+        box-sizing: revert;
+    }
+
+    #items {
+        flex-direction: column;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        height: 170%;
+
+        div {
+            width: 100%;
+        }
+
+        #ingredients {
+            height: 70%;
+        }
+
+        #steps {
+            height: 90%;
         }
     }
 }
