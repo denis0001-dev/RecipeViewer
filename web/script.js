@@ -7,6 +7,13 @@ var savedCreateState = {
     recipe: undefined
 }
 
+var savedViewState = {
+    name: undefined,
+    multiplier: 1,
+    currentStep: 1,
+    recipe: undefined
+}
+
 var unsavedChanges = false;
 
 document.onbeforeunload = () => {

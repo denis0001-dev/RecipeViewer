@@ -20,6 +20,36 @@ function main() {
 
     let multiply = 1;
 
+    document.body.onbeforeunload = () => {
+        parent.savedViewState = {
+            name: recipeName.value,
+            multiplier: multiply,
+            currentStep: currentStep,
+            recipe: recipe
+        }
+
+        if (!parent.switching) return "";
+        return undefined;
+    }
+
+    if (parent.savedViewState.recipe !== undefined) {
+        recipeName.value = parent.savedViewState.name;
+        multiply, multiplier.value = parent.savedViewState.multiplier;
+        multiplier.value = parent.savedViewState.multiplier;
+        currentStep = parent.savedViewState.currentStep;
+        recipe = parent.savedViewState.recipe;
+        loadRecipe();
+        step_center.querySelector("p").textContent = safeHTMLString(processRecipeText(recipe.steps[currentStep - 1]['step'+currentStep]));
+        step_center.querySelector("h1").textContent = "Step #"+currentStep;
+        next.disabled = recipe.steps[currentStep] === undefined;
+        prev.disabled = recipe.steps[currentStep - 2] === undefined;
+    }
+
+    if (parent.savedViewState.multiplier !== undefined) {
+        multiplier.value = parent.savedViewState.multiplier;
+        checkMultiplier();
+    }
+
     function checkMultiplier() {
         if (isNaN(Number(multiplier.value)) || multiplier.value <= 0 || multiplier.value === "") {
             multiplier.error = true;
@@ -32,6 +62,7 @@ function main() {
             try {
                 processedText = processRecipeText(recipe.steps[currentStep - 1]['step'+currentStep]);
             } catch (_) {
+                // we don't need to process the error
                 processedText = step_center.querySelector("p").textContent;
             }
             // console.log(processedText);
@@ -72,6 +103,55 @@ function main() {
         }
     }
 
+    function loadRecipe() {
+        const ings = recipe.ingredients;
+
+        clear();
+
+        ings.forEach(async ing => {
+            let i = ings.indexOf(ing);
+            const ingredient = document.createElement("md-list-item");
+
+            const number = document.createElement("span");
+            number.slot = "start";
+            number.innerHTML = "#" + (i + 1);
+            ingredient.appendChild(number);
+
+            const root = document.createElement("div");
+            root.classList.add("root");
+
+            const ingName = document.createElement("md-filled-text-field");
+            ingName.id = `ing${i + 1}_name`;
+            ingName.classList.add("name");
+            ingName.value = ing.name.replaceAll("_", " ");
+            ingName.readOnly = true;
+            root.appendChild(ingName);
+
+            const ingCount = document.createElement("md-filled-text-field");
+            ingCount.id = `ing${i + 1}_count`;
+            ingCount.classList.add("count");
+            ingCount.value = ing.count;
+            ingCount.readOnly = true;
+            root.appendChild(ingCount);
+
+            const ingUnit = document.createElement("md-filled-text-field");
+            ingUnit.id = `ing${i + 1}_unit`;
+            ingUnit.classList.add("unit");
+            ingUnit.value = ing.count2;
+            ingUnit.readOnly = true;
+            root.appendChild(ingUnit);
+
+            ingredient.appendChild(root);
+            ingredient.style.animation = "itemAppear 0.5s ease-in-out";
+            ingredients.appendChild(ingredient);
+            await delay(500);
+            ingredient.style.animation = "none";
+        });
+        step_center.querySelector("p").textContent = safeHTMLString(processRecipeText(recipe.steps[0]['step1']));
+        step_center.querySelector("h1").textContent = "Step #1";
+        next.disabled = recipe.steps[1] === undefined;
+    }
+
     load.addEventListener("click", () => {
         const input = document.createElement("input");
         input.type = "file";
@@ -79,6 +159,7 @@ function main() {
         input.onchange = e => {
             const file = e.target.files[0];
             const name = file.name.toString();
+            // noinspection JSUnusedLocalSymbols
             const type = file.type;
 
             const reader = new FileReader();
@@ -89,52 +170,7 @@ function main() {
                 const json = await processJSONFile(file, e.target.result);
                 recipe = JSON.parse(json);
 
-                const ings = recipe.ingredients;
-
-                clear();
-
-                ings.forEach(async ing => {
-                    let i = ings.indexOf(ing);
-                    const ingredient = document.createElement("md-list-item");
-
-                    const number = document.createElement("span");
-                    number.slot = "start";
-                    number.innerHTML = "#" + (i + 1);
-                    ingredient.appendChild(number);
-
-                    const root = document.createElement("div");
-                    root.classList.add("root");
-
-                    const ingName = document.createElement("md-filled-text-field");
-                    ingName.id = `ing${i + 1}_name`;
-                    ingName.classList.add("name");
-                    ingName.value = ing.name.replaceAll("_", " ");
-                    ingName.readOnly = true;
-                    root.appendChild(ingName);
-
-                    const ingCount = document.createElement("md-filled-text-field");
-                    ingCount.id = `ing${i + 1}_count`;
-                    ingCount.classList.add("count");
-                    ingCount.value = ing.count;
-                    ingCount.readOnly = true;
-                    root.appendChild(ingCount);
-
-                    const ingUnit = document.createElement("md-filled-text-field");
-                    ingUnit.id = `ing${i + 1}_unit`;
-                    ingUnit.classList.add("unit");
-                    ingUnit.value = ing.count2;
-                    ingUnit.readOnly = true;
-                    root.appendChild(ingUnit);
-
-                    ingredient.appendChild(root);
-                    ingredient.style.animation = "itemAppear 0.5s ease-in-out";
-                    ingredients.appendChild(ingredient);
-                    await delay(500);
-                    ingredient.style.animation = "none";
-                });
-                step_center.querySelector("p").textContent = safeHTMLString(processRecipeText(recipe.steps[0]['step1']));
-                step_center.querySelector("h1").textContent = "Step #1";
-                next.disabled = recipe.steps[1] === undefined;
+                loadRecipe();
             }
         }
         input.click();

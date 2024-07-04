@@ -21,6 +21,10 @@ main {
     md-filled-text-field {
         align-self: flex-start;
     }
+
+    #multiplier {
+        width: 90px;
+    }
     flex-shrink: 1;
 }
 
