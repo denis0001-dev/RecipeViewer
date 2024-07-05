@@ -1,0 +1,17 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "global.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denis0001-dev/RecipeViewer.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "@material/web": "^1.5.1"
+  }
+}

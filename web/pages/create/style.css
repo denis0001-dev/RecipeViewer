@@ -176,7 +176,7 @@ main, #top {
     }
 }
 
-@media (prefers-color-scheme: dark) {
+html[data-theme="dark"] {
     #createFinished #finishedRecipeCode {
         background-color: #292929;
         color: white;

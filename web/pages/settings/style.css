@@ -1,0 +1,12 @@
+md-list-item {
+
+    div[slot="headline"] {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        span + * {
+            padding-left: 20px;
+        }
+    }
+}

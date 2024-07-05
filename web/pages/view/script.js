@@ -171,7 +171,7 @@ function main() {
                 recipe = JSON.parse(json);
 
                 loadRecipe();
-            }
+            };
         }
         input.click();
     });

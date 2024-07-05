@@ -70,6 +70,7 @@ function root_page() {
 
             iframe = document.getElementById("page");
             iframe_right = document.getElementById("page-right");
+            clearURLs();
             await animateChange();
         }
         // Left
@@ -85,13 +86,14 @@ function root_page() {
 
             iframe = document.getElementById("page");
             iframe_left = document.getElementById("page-left");
+            clearURLs();
             await animateChange();
         }
         // Current
         else if (iframe.src !== url) {
+            clearURLs();
             iframe.src = url;
         }
-        clearURLs();
         switching = false;
     }
 

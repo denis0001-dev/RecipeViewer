@@ -14,6 +14,9 @@
     transition-timing-function: ease-in-out, ease-in-out !important; */
     box-sizing: border-box;
     resize: none;
+    transition-property: background-color, color;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
 }
 
 html, body {
@@ -65,23 +68,22 @@ pre {
     overflow: auto !important;
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        --md-sys-color-surface: #010800;
-        --md-sys-color-on-surface: #e2e4df;
-        --md-sys-color-on-surface-variant: #b6bab0;
-        /* --md-sys-color-primary: #9973ff; */
-        --md-dialog-container-color: #1d1d1d;
-        --md-sys-color-secondary-container: #494967;
-        --md-sys-color-on-secondary-container: white;
-        --md-sys-color-error: #e61d11;
-        --md-sys-color-surface-container-high: #1f1f1f;
-        --md-list-container-color: #080808;
-        --md-sys-color-surface-container-highest: #1c1c1c;
-        background-color: black;
-        color: white;
-        color-scheme: dark;
-    }
+html[data-theme="dark"] > body {
+    --md-sys-color-surface: #010800;
+    --md-sys-color-on-surface: #e2e4df;
+    --md-sys-color-on-surface-variant: #b6bab0;
+    /* --md-sys-color-primary: #9973ff; */
+    --md-dialog-container-color: #1d1d1d;
+    --md-sys-color-secondary-container: #494967;
+    --md-sys-color-on-secondary-container: white;
+    --md-sys-color-error: #e61d11;
+    --md-sys-color-surface-container-high: #1f1f1f;
+    --md-list-container-color: #080808;
+    --md-sys-color-surface-container-highest: #1c1c1c;
+    --md-sys-color-surface-container: #252525;
+    background-color: black;
+    color: white;
+    color-scheme: dark;
 }
 
 @keyframes itemAppear {

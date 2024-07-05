@@ -58,7 +58,7 @@ md-filled-button {
     }
 }
 
-@media (prefers-color-scheme: dark) {
+html[data-theme="dark"] {
     .background {
         background-color: #1d1d1d;
     }
