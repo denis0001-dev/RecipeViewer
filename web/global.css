@@ -6,7 +6,7 @@
     --md-sys-typescale-body-small-font: var(--font);
 }
 
-*, *:before, *:after, *::placeholder {
+*, *:before, *:after, *::placeholder, :host {
     font-family: var(--font), sans-serif;
     animation-fill-mode: forwards !important;
     /* transition-duration: 1s, 1s !important;
