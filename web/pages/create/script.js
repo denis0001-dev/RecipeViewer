@@ -116,7 +116,7 @@ function main() {
             }
         }
         input.click();
-    })
+    });
 
     function loadJSON(name, json) {
         recipeName.value = name.substring(0, name.lastIndexOf("."));
