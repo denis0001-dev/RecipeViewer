@@ -32,6 +32,7 @@ function main() {
     const stepsList = [];
 
     document.body.onbeforeunload = () => {
+        if (getCookie("saveStates") === false) return undefined;
         recipeJSON = createJSON(false);
         parent.savedCreateState = {
             name: recipeName.value,

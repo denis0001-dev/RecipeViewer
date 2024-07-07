@@ -11,6 +11,9 @@ function main() {
     const saveStates = document.getElementById("saveStates");
 
     let cookieTheme = top.getCookie("theme");
+    let cookieLang = top.getCookie("lang");
+    let cookieTips = top.getCookie("tips");
+    let cookieSaveStates = top.getCookie("saveStates");
 
     function changeSelectValue(select, value) {
         for (let i = 0; i < select.children.length; i++) {
@@ -51,5 +54,47 @@ function main() {
         }
         document.dispatchEvent(new Event("themechange"));
         top.document.dispatchEvent(new Event("themechange"));
+    });
+
+    if (cookieLang) {
+        changeSelectValue(lang, cookieLang);
+    } else {
+        changeSelectValue(lang, "en");
+    }
+
+    lang.addEventListener("change", () => {
+        const value = selectedValue(lang);
+        top.setCookie("lang", value);
+        document.dispatchEvent(new Event("languagechange"));
+        top.document.dispatchEvent(new Event("languagechange"));
+    });
+
+    displayTips.selected = cookieTips;
+
+    displayTips.addEventListener("change", () => {
+        const value = displayTips.selected;
+        top.setCookie("tips", value);
+    });
+
+    if (cookieSaveStates === null) {
+        top.setCookie("saveStates", true);
+        cookieSaveStates = true;
+    }
+
+    saveStates.selected = cookieSaveStates;
+
+    saveStates.addEventListener("change", () => {
+        const value = saveStates.selected;
+        top.setCookie("saveStates", value);
+        top.savedViewState = {
+            name: undefined,
+            multiplier: 1,
+            currentStep: 1,
+            recipe: undefined
+        };
+        top.savedCreateState = {
+            name: undefined,
+            recipe: undefined
+        };
     });
 }

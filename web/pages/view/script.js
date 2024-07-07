@@ -21,6 +21,7 @@ function main() {
     let multiply = 1;
 
     document.body.onbeforeunload = () => {
+        if (getCookie("saveStates") === false) return undefined;
         parent.savedViewState = {
             name: recipeName.value,
             multiplier: multiply,

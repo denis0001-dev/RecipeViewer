@@ -58,6 +58,10 @@ iframe {
     display: flex;
 }
 
+html[data-tips="false"] .tip {
+    display: none !important;
+}
+
 pre {
     margin: 10px;
     background-color: #cacaca;
