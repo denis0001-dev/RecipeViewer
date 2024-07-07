@@ -42,18 +42,20 @@
     <body>
         <main>
             <div id="top">
-                <md-filled-text-field
-                        id="recipeName"
-                        label="Recipe Name"
-                        readOnly
-                        suffix-text=".json">
-                </md-filled-text-field>
-                <md-filled-text-field
-                        id="multiplier"
-                        label="Multiplier"
-                        prefix-text="x"
-                        value="1"
-                ></md-filled-text-field>
+                <div id="top_fields">
+                    <md-filled-text-field
+                            id="recipeName"
+                            label="Recipe Name"
+                            readOnly
+                            suffix-text=".json">
+                    </md-filled-text-field>
+                    <md-filled-text-field
+                            id="multiplier"
+                            label="Multiplier"
+                            prefix-text="x"
+                            value="1"
+                    ></md-filled-text-field>
+                </div>
                 <md-filled-button id="load">
                     Choose file
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">

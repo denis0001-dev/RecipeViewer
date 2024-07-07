@@ -17,15 +17,25 @@ main {
     height: 56px;
     width: 100%;
     gap: 8px;
-
-    md-filled-text-field {
-        align-self: flex-start;
-    }
-
-    #multiplier {
-        width: 90px;
-    }
     flex-shrink: 1;
+
+    #top_fields {
+        display: inherit;
+        gap: inherit;
+        align-items: flex-start;
+        height: 100%;
+
+        md-filled-text-field {
+            align-self: flex-start;
+        }
+
+        #multiplier {
+            width: 90px;
+            min-width: 50px;
+        }
+    }
+
+
 }
 
 #items {
@@ -160,6 +170,23 @@ main {
 
         #steps {
             height: 90%;
+        }
+    }
+}
+
+@media (max-width: 340px) {
+    #top {
+        flex-direction: column;
+        height: auto;
+
+        #top_fields {
+            width: 100%;
+            height: 56px;
+            align-items: flex-start;
+        }
+
+        md-filled-button {
+            align-self: flex-start;
         }
     }
 }

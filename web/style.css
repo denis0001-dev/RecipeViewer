@@ -4,6 +4,10 @@ body {
     overflow: hidden !important;
 }
 
+md-tabs {
+    --md-sys-color-primary: #7f65c1;
+}
+
 #iframes {
     flex-grow: 1;
     width: 100%;

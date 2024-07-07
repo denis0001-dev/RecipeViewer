@@ -1,5 +1,4 @@
 md-list-item {
-
     div[slot="headline"] {
         display: flex;
         flex-direction: row;
@@ -8,5 +7,12 @@ md-list-item {
         span + * {
             padding-left: 20px;
         }
+    }
+}
+
+@media (max-width: 450px) {
+    md-list-item div[slot="headline"] span + * {
+        padding-left: revert;
+        margin-left: auto;
     }
 }
