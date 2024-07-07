@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener("localized", main);
 
 function main() {
     const theme = document.getElementById("theme");
@@ -19,9 +19,9 @@ function main() {
         for (let i = 0; i < select.children.length; i++) {
             const option = select.children[i];
             if (option.value === value) {
+                localize(option.querySelector("div[slot='headline']"));
                 option.selected = true;
                 option.tabIndex = 0;
-                break;
             } else {
                 option.selected = false;
                 option.tabIndex = -1;
@@ -32,11 +32,15 @@ function main() {
     function selectedValue(select) {
         for (let i = 0; i < select.children.length; i++) {
             const option = select.children[i];
-            if (option.selected) {
+            if (option.selected && option.tabIndex === 0) {
                 return option.value;
             }
         }
         return null;
+    }
+
+    function getOptionByValue(select, value) {
+        return select.querySelector(`md-select-option[value="${value}"]`);
     }
 
     if (cookieTheme) {
@@ -96,5 +100,11 @@ function main() {
             name: undefined,
             recipe: undefined
         };
+    });
+
+    document.body.querySelectorAll("md-outlined-select:not(#language)").forEach(item => {
+        const label = item.shadowRoot.children[0].querySelector("md-outlined-field > div#label");
+        label.dataset.lkey = getOptionByValue(item, selectedValue(item)).querySelector("div[slot='headline']").dataset.lkey;
+        localize(label);
     });
 }

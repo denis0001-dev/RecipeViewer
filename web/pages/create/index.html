@@ -51,13 +51,13 @@
                 ></md-outlined-text-field>
                 <div class="buttons">
                     <md-filled-tonal-button id="clear">
-                        Clear
+                        <span data-lkey="clear">Clear</span>
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
                             <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
                         </svg>
                     </md-filled-tonal-button>
                     <md-filled-button id="load">
-                        Load from file
+                        <span data-lkey="loadFromFile">Load from file</span>
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
                             <path d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/>
                         </svg>
@@ -66,7 +66,7 @@
             </div>
             <div id="items">
                 <div id="ingredients">
-                    <h2>Ingredients</h2>
+                    <h2 data-lkey="ingredients">Ingredients</h2>
                     <div class="scroll">
                         <md-list>
                             <!--
@@ -82,7 +82,7 @@
                                 </div>
                             </md-list-item>
                             -->
-                            <p class="tip">
+                            <p class="tip" data-lkey="tipWithPlus">
                                 Nothing here. To get started, just press "+" in the bottom right corner of this list.
                             </p>
                         </md-list>
@@ -94,7 +94,7 @@
 
                 </div>
                 <div id="steps">
-                    <h2>Steps</h2>
+                    <h2 data-lkey="steps">Steps</h2>
                     <div class="scroll">
                         <md-list>
                             <!--
@@ -109,10 +109,16 @@
                             </md-list-item>
                             -->
                             <p class="tip">
-                                Nothing here. To get started, just press "+" in the bottom right corner of this list.
+                                <span>
+                                    <span data-lkey="tipWithPlus">
+                                    Nothing here. To get started, just press "+" in the bottom right corner of this list.
+                                </span>
                                 <br/>
-                                Tip: You can use "*" and a number to make it multiply by the recipe multiplier.
-                                Example: "Mix all the *3 things together"
+                                <span data-lkey="tipWithWildcard">
+                                    Tip: You can use "*" and a number to make it multiply by the recipe multiplier.
+                                    Example: "Mix all the *3 things together"
+                                </span>
+                                </span>
                             </p>
                         </md-list>
                     </div>
@@ -122,7 +128,7 @@
                 </div>
             </div>
             <md-filled-button id="create">
-                Create Recipe
+                <span data-lkey="createRecipe">Create Recipe</span>
                 <svg slot="icon"
                      xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 -960 960 960">
@@ -131,14 +137,14 @@
             </md-filled-button>
         </main>
         <md-dialog id="createFinished">
-            <div slot="headline">Creation finished!</div>
+            <div slot="headline" data-lkey="creationFinished">Creation finished!</div>
             <div slot="content">
                 <pre id="finishedRecipeCode"></pre>
             </div>
             <div slot="actions">
                 <div class="computer">
                     <md-filled-tonal-button class="finishedClose" value="close">
-                        Close
+                        <span data-lkey="close">Close</span>
                         <svg
                                 slot="icon"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +153,7 @@
                         </svg>
                     </md-filled-tonal-button>
                     <md-filled-button class="finishedCopy" value="copy">
-                        Copy
+                        <span data-lkey="copy">Copy</span>
                         <svg
                                 slot="icon"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +183,7 @@
                 </div>
 
                 <md-filled-button class="finishedDownload" value="download">
-                    Download as JSON
+                    <span data-lkey="downloadAsJSON">Download as JSON</span>
                     <svg
                             slot="icon"
                             xmlns="http://www.w3.org/2000/svg"
@@ -188,13 +194,13 @@
             </div>
         </md-dialog>
         <md-dialog id="createFail">
-            <div slot="headline">Invalid recipe</div>
-            <div slot="content">
+            <div slot="headline" data-lkey="invalidRecipe">Invalid recipe</div>
+            <div slot="content" data-lkey="invalidRecipeDesc">
                 The recipe you're trying to create has invalid ingredients or steps. Please check your input and try again.
             </div>
             <div slot="actions">
                 <md-filled-tonal-button id="failClose" value="close">
-                    Close
+                    <span data-lkey="close">Close</span>
                     <svg
                             slot="icon"
                             xmlns="http://www.w3.org/2000/svg"

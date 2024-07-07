@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener("localized", main);
 
 function main() {
     const load = document.getElementById("load");
@@ -82,16 +82,18 @@ function main() {
         const regex = /^(?!CON|PRN|AUX|NUL|(COM|LPT)([0123456789¹²³]))[^/\\><|:&?*\u2400]{1,255}$/i;
         if ((regex.exec(recipeName.value)) === null) {
             recipeName.error = true;
-            recipeName.errorText = "Don't use restricted characters";
+            recipeName.errorText = translate("dontUseRestrictedChars") || "Don't use restricted characters";
 
             if (recipeName.value === "") {
-                recipeName.errorText = "Recipe name shouldn't be empty";
+                recipeName.errorText = translate("shouldntBeEmpty") || "Recipe name shouldn't be empty";
             }
         } else {
             recipeName.error = false;
             recipeName.errorText = undefined;
         }
     }
+
+    recipeName.label = translate("recipeName") || recipeName.label;
 
     inputListener(recipeName, checkRecipeName);
 
@@ -276,12 +278,13 @@ function main() {
 
         const root = document.createElement("div");
         root.classList.add("root");
+        root.dataset.nolocalize = "";
 
         const ingName = document.createElement("md-filled-text-field");
         ingName.id = `ing${ingNumber}_name`;
         ingName.classList.add("name");
         ingName.value = name;
-        ingName.placeholder = "Name";
+        ingName.placeholder = translate("name") || "Name";
         inputListener(ingName, isNotEmpty, ingName);
         root.appendChild(ingName);
 
@@ -289,7 +292,7 @@ function main() {
         ingCount.id = `ing${ingNumber}_count`;
         ingCount.classList.add("count");
         ingCount.value = count;
-        ingCount.placeholder = "Count";
+        ingCount.placeholder = translate("count") || "Count";
 
         function validateNumber() {
             // const regex = /^[123456789]+$/m
@@ -315,7 +318,7 @@ function main() {
         ingUnit.id = `ing${ingNumber}_unit`;
         ingUnit.classList.add("unit");
         ingUnit.value = unit;
-        ingUnit.placeholder = "Unit";
+        ingUnit.placeholder = translate("unit") || "Unit";
         inputListener(ingUnit, isNotEmpty, ingUnit);
         root.appendChild(ingUnit);
 
@@ -365,7 +368,7 @@ function main() {
         stepDesc.id = `step${stepNumber}_desc`;
         stepDesc.classList.add("desc");
         stepDesc.value = desc;
-        stepDesc.placeholder = "Describe your step";
+        stepDesc.placeholder = translate("stepDesc") || "Describe your step";
         inputListener(stepDesc, isNotEmpty, stepDesc);
         root.appendChild(stepDesc);
 

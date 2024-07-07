@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--suppress JSFileReferences, JSFileReferences -->
-<html lang="en">
+<html lang="en" data-noobserve>
     <head>
         <title>Settings</title>
         <meta charset="UTF-8"/>
@@ -69,18 +69,16 @@
         <md-list>
             <md-list-item>
                 <div slot="headline">
-                    <span>Theme</span>
+                    <span data-lkey="theme">Theme</span>
                     <md-outlined-select id="theme">
                         <md-select-option value="light">
-                            <div slot="headline">Light</div>
+                            <div slot="headline" data-lkey="light_theme">Light</div>
                         </md-select-option>
                         <md-select-option value="dark">
-                            <div slot="headline">
-                                Dark
-                            </div>
+                            <div slot="headline" data-lkey="dark_theme">Dark</div>
                         </md-select-option>
                         <md-select-option selected value="system">
-                            <div slot="headline">System default</div>
+                            <div slot="headline" data-lkey="default">System default</div>
                         </md-select-option>
                     </md-outlined-select>
                 </div>
@@ -88,7 +86,7 @@
             <!-- <md-divider inset></md-divider> -->
             <md-list-item>
                 <div slot="headline">
-                    <span>Language</span>
+                    <span data-lkey="language">Language</span>
                     <md-outlined-select id="language">
                         <md-select-option selected value="en">
                             <div slot="headline">English</div>
@@ -101,13 +99,13 @@
             </md-list-item>
             <md-list-item>
                 <div slot="headline">
-                    <span>Save states of tabs</span>
+                    <span data-lkey="saveStatesOfTabs">Save states of tabs</span>
                     <md-switch id="saveStates" selected></md-switch>
                 </div>
             </md-list-item>
             <md-list-item>
                 <div slot="headline">
-                    <span>Display tips</span>
+                    <span data-lkey="displayTips">Display tips</span>
                     <md-switch id="displayTips" selected></md-switch>
                 </div>
             </md-list-item>

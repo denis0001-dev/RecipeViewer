@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener("localized", main);
 
 function main() {
     const recipeName = document.getElementById("recipeName");
@@ -41,7 +41,7 @@ function main() {
         recipe = parent.savedViewState.recipe;
         loadRecipe();
         step_center.querySelector("p").textContent = safeHTMLString(processRecipeText(recipe.steps[currentStep - 1]['step'+currentStep]));
-        step_center.querySelector("h1").textContent = "Step #"+currentStep;
+        step_center.querySelector("h1").textContent = (translate("step") || "Step #")+currentStep;
         next.disabled = recipe.steps[currentStep] === undefined;
         prev.disabled = recipe.steps[currentStep - 2] === undefined;
     }
@@ -50,6 +50,9 @@ function main() {
         multiplier.value = parent.savedViewState.multiplier;
         checkMultiplier();
     }
+
+    multiplier.label = translate("multiplier") || multiplier.label;
+    recipeName.label = translate("recipeName") || recipeName.label;
 
     function checkMultiplier() {
         if (isNaN(Number(multiplier.value)) || multiplier.value <= 0 || multiplier.value === "") {
@@ -74,7 +77,6 @@ function main() {
     }
 
     function updateIngredients() {
-
         Array.from(ingredients.children).forEach(item => {
             if (item instanceof HTMLParagraphElement) return;
             const count = item.querySelector(".root md-filled-text-field.count");
@@ -149,7 +151,7 @@ function main() {
             ingredient.style.animation = "none";
         });
         step_center.querySelector("p").textContent = safeHTMLString(processRecipeText(recipe.steps[0]['step1']));
-        step_center.querySelector("h1").textContent = "Step #1";
+        step_center.querySelector("h1").textContent = (translate("step") || "Step #") + 1;
         next.disabled = recipe.steps[1] === undefined;
     }
 
@@ -198,7 +200,7 @@ function main() {
         if (recipe.steps[(currentStep - 1) - 1] !== undefined) {
             currentStep--;
             const text = safeHTMLString(processRecipeText(recipe.steps[currentStep - 1]['step' + currentStep]));
-            const number = "Step #" + currentStep;
+            const number = (translate("step") || "Step #") + currentStep;
 
             const nextState = next.disabled;
 
@@ -223,7 +225,7 @@ function main() {
         if (recipe.steps[currentStep] !== undefined) {
             currentStep++;
             const text = safeHTMLString(processRecipeText(recipe.steps[currentStep - 1]['step' + currentStep]));
-            const number = "Step #" + currentStep;
+            const number = (translate("step") || "Step #") + currentStep;
 
             const prevState = prev.disabled;
 

@@ -13,6 +13,144 @@ document.addEventListener("DOMContentLoaded", () => {
         allow-top-navigation \
         allow-downloads";
     });
+
+    // Localization
+    const locale_ru = {
+        theme: "Тема",
+        dark_theme: "Тёмная",
+        light_theme: "Светлая",
+        default: "По умолчанию",
+        language: "Язык",
+        saveStatesOfTabs: "Сохранять состояние вкладок",
+        displayTips: "Показывать подсказки",
+        clear: "Очистить",
+        loadFromFile: "Загрузить из файла",
+        ingredients: "Ингредиенты",
+        tipWithPlus: 'Здесь ничего нет. Нажмите "+" в правом нижнем углу этого списка, чтобы начать.',
+        steps: "Шаги",
+        tipWithWildcard: 'Подсказка: Используйте "*" и число, чтобы оно умножилось на указанное кол-во порций. Пример: "Смешайте все *3 вещи вместе"',
+        createRecipe: "Создать рецепт",
+        creationFinished: "Рецепт создан!",
+        close: "Закрыть",
+        copy: "Скопировать",
+        downloadAsJSON: "Скачать как JSON",
+        invalidRecipe: "Неверный рецепт",
+        invalidRecipeDesc: "Рецепт, который вы пытаетесь создать имеет неправильные ингредиенты или шаги. Пожалуйста, проверьте все поля и попробуйте снова.",
+        name: "Имя",
+        count: "Кол-во",
+        unit: "Ед. измерения",
+        stepDesc: "Опишите ваш шаг",
+        recipeName: "Имя рецепта",
+        shouldntBeEmpty: "Имя не должно быть пустым",
+        dontUseRestrictedChars: "Не используйте запрещенные символы",
+        chooseFile: "Выбрать файл",
+        tipChooseFile: 'Здесь ничего нет. Нажмите "Выбрать файл" в левом верхнем углу, чтобы загрузить рецепт.',
+        previous: "Предыдущий",
+        next: "Следующий",
+        step: "Шаг №",
+        multiplier: "Порции",
+        home: "Главная",
+        create: "Создать",
+        view: "Просмотр",
+        settings: "Настройки",
+        about: "О программе",
+        welcome: "Добро пожаловать в Recipe Helper!",
+        programDesc: "Recipe Helper - простая программа для удобного просмотра и создания рецептов. " +
+            "Вы можете умножать ингредиенты на указанное кол-во порций.",
+        viewRecipe: "Просмотреть рецепт"
+    }
+
+    const locale_en = {};
+
+    const locales = {
+        "ru": locale_ru,
+        "en": locale_en
+    }
+
+    function updateLang() {
+        let lang = getCookie("lang");
+
+        if (lang === null) {
+            setCookie("lang", "en");
+            lang = "en";
+        }
+
+        document.html.lang = lang;
+
+        let localizedItems = document.body.querySelectorAll("[data-lkey]");
+
+        localizedItems.forEach(item => {
+            _localize(item);
+        });
+
+        function _localize(item) {
+            if (!item instanceof HTMLElement) return;
+            if (item instanceof Text) return;
+            /* if (item.tagName.toLowerCase() === "md-filled-icon-button") return;
+            let localize = true;
+            let parent = item;
+
+            while (true) {
+                parent = parent.parentElement;
+                if (!parent) break;
+                localize = !parent.dataset.nolocalize;
+                if (!localize) break;
+            }
+
+            console.log("Localization:",localize);
+
+            if (!localize) return; */
+
+            let key;
+            try {
+                key = item.dataset.lkey;
+            } catch (ignore) {
+                // console.warn("Localization key on", item, "doesn't exist!");
+                return;
+            }
+
+            if (!locale_en[key]) {
+                locale_en[key] = item.innerHTML;
+            }
+            const value = _translate(key);
+            if (!value) {
+                // console.warn("No translation for", key, "in", lang);
+                return;
+            }
+
+            item.innerHTML = value;
+        }
+
+        function _translate(key) {
+            return locales[lang][key] || null;
+        }
+
+        window.localize = _localize;
+        window.translate = _translate;
+    }
+
+    updateLang();
+    document.dispatchEvent(new Event("localized"));
+    document.addEventListener("languagechange", updateLang);
+
+    if (!document.html.dataset.noobserve) {
+        const l_config = {attributes: false, childList: true, subtree: true};
+
+        function l_callback(mutationList) {
+            // console.log("An element was added, localizing...");
+            for (const mutation of mutationList) {
+                if (mutation.type === "childList") {
+                    mutation.addedNodes.forEach(item => {
+                        localize(item);
+                        // console.log(item);
+                    });
+                }
+            }
+        }
+
+        const l_observer = new MutationObserver(l_callback);
+        l_observer.observe(document.body, l_config);
+    }
 });
 
 /**
