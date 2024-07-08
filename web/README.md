@@ -1,4 +1,13 @@
 # RecipeViewer Web
+<style>
+    img {
+        height: calc(373px / 4);
+        width: calc(373px / 4);
+    }
+</style>
+
+![](icon.svg)
+
 Веб-версия RecipeViewer. Поддерживает тот же самый формат JSON.
 <br/>
 https://denis0001-dev.github.io/RecipeViewer
@@ -13,7 +22,7 @@ https://denis0001-dev.github.io/RecipeViewer
 | [Создание рецепта](https://denis0001-dev.github.io/RecipeViewer/pages/create) | Создание рецепта, с проверками на непустые поля и правильные числа                               | Готова         | ~~При неправильном JSON никакого уведомления не будет~~ |
 | [Просмотр рецепта](https://denis0001-dev.github.io/RecipeViewer/pages/view)   | Просмотр рецепта, с умножением на кол-во порций и удобным пролистыванием шагов                   | Готова         | ~~При неправильном JSON никакого уведомления не будет~~ |
 | Библиотека                                                                    | Библиотека ваших и созданных сообществом рецептов                                                | Запланированна |                                                         |
-| [Настройки](https://denis0001-dev.github.io/RecipeViewer/pages/settings)      | Настройки сайта, сохранются в куки-файлах                                                        | Почти готова   | ~~Не работает настройка языка~~                         |
+| [Настройки](https://denis0001-dev.github.io/RecipeViewer/pages/settings)      | Настройки сайта, сохранются в куки-файлах                                                        | Почти готова   | ~~Не работает настройка языка~~ Не работает смена темы  |
 | [О программе](https://denis0001-dev.github.io/RecipeViewer/pages/about)       | Информация о программе, ссылка на [проект GitHub](https://github.com/denis0001-dev/RecipeViewer) | Не начата      |                                                         |
 
 

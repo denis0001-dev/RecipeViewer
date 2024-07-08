@@ -31,6 +31,11 @@ body {
     /* transition: margin-top, margin-bottom, width 0.25s ease-in-out; */
 }
 
+#icon {
+    width: calc(373px / 4);
+    height: calc(373px / 4);
+}
+
 /* .buttons {
     transition: flex-direction 0.5s ease-in-out; // doesn't work
     transition: transform 0.5s ease-in-out;
