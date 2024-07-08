@@ -18,8 +18,8 @@ https://denis0001-dev.github.io/RecipeViewer
 
 
 # Библиотеки
-| Имя                                              | Использование              | Статус  |
-|--------------------------------------------------|----------------------------|---------|
-| [Material Design](https://material.io)           | Глобальная система дизайна | Исп.    |
-| [Html2Canvas](https://html2canvas.hertzen.com/)  | Скриншот сайта             | Удалено |
-| [Material Icons](https://fonts.google.com/icons) | Иконки Material Design     | Исп.    |
+| Имя                                                 | Использование              | Статус  |
+|-----------------------------------------------------|----------------------------|---------|
+| [Material Design](https://material.io)              | Глобальная система дизайна | Исп.    |
+| ~~[Html2Canvas](https://html2canvas.hertzen.com/)~~ | Скриншот сайта             | Удалено |
+| [Material Icons](https://fonts.google.com/icons)    | Иконки Material Design     | Исп.    |
