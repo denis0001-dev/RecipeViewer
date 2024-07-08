@@ -43,13 +43,64 @@
             <article class="main">
                 <h1 data-lkey="welcome">Welcome to Recipe Helper!</h1>
                 <p data-lkey="programDesc">
-                    Recipe Helper is a simple app to help you create or follow someone's recipe. You can multiply your recipe
+                    Recipe Helper (also known as RecipeViewer) is a simple app to help you create or follow someone's
+                    recipe. You can
+                    multiply your recipe
                     ingredients easily.
                 </p>
                 <div class="buttons">
                     <md-filled-button id="createRecipe" data-lkey="createRecipe">Create your own recipe</md-filled-button>
                     <md-filled-button id="viewRecipe" data-lkey="viewRecipe">View a recipe</md-filled-button>
                 </div>
+                <h1 data-lkey="threeprogramsoneformat">3 programs - 1 format</h1>
+                <div class="p">
+                    <span data-lkey="threeversions">Recipe Helper has 3 versions: The command line version (the first
+                        one,
+                          written in Java), the GUI version (in Java too), and this web version.
+                    </span>
+                    <div class="images">
+                        <img src="../../images/cli.png" alt="The CLI version" />
+                        <img src="../../images/gui.png" alt="The GUI version" />
+                    </div>
+                    <span data-lkey="oneformat">All of them support one format</span> - <code>JSON</code>.
+                    <span data-lkey="recipeExample">The recipe file looks something like this:</span>
+                    <pre data-language="json" data-syntaxhighlight>
+                        {
+                            "ingredients": [
+                                {
+                                    "name": "test",
+                                    "count": "1",
+                                    "count2": "thing"
+                                }
+                            ],
+                            "steps": [
+                                {
+                                    "step1": "test"
+                                }
+                            ]
+                        }
+                    </pre>
+                    <span class="note" data-lkey="notAnActualRecipe">Not an actual recipe.</span>
+                </div>
+                <h1 data-lkey="opensource">Open-source</h1>
+                <p>
+                    <span data-lkey="sourceCode">
+                        The source code of this program and all of its versions is publicly available at
+                    </span>
+                    <a href="https://github.com" target="_blank">GitHub</a>.
+                    <span data-lkey="github">
+                        GitHub is a free platform for sharing open-source projects.
+                        It has a built-in issue tracker to fix the issues more easily.
+                    </span>
+                </p>
+                <a href="https://github.com/denis0001-dev/RecipeViewer" target="_blank">
+                    <md-filled-button trailing-icon>
+                        <span data-lkey="projectOnGithub">Project on GitHub</span>
+                        <svg slot="icon" viewBox="0 -960 960 960">
+                            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/>
+                        </svg>
+                    </md-filled-button>
+                </a>
             </article>
         </div>
     </body>

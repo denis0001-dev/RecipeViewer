@@ -57,7 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
         welcome: "Добро пожаловать в Recipe Helper!",
         programDesc: "Recipe Helper - простая программа для удобного просмотра и создания рецептов. " +
             "Вы можете умножать ингредиенты на указанное кол-во порций.",
-        viewRecipe: "Просмотреть рецепт"
+        viewRecipe: "Просмотреть рецепт",
+        threeprogramsoneformat: "3 программы - 1 формат",
+        threeversions: "Recipe Helper имеет 3 версии: консольная (первая, написана на Java), графическая (тоже на Java), и эта веб-версия.",
+        oneformat: "Все версии поддерживают один формат",
+        recipeExample: "Файл рецепта выглядит как-то так:",
+        notAnActualRecipe: "Не настоящий рецепт.",
+        opensource: "Открытый исходный код",
+        sourceCode: "Исходный код этой программы и всех её версий доступен на",
+        github: "GitHub - это бесплатная платформа для хранения проектов с открытым исходным кодом. У нее есть встроенный трекер проблем, чтобы исправить их легче.",
+        projectOnGithub: "Проект на GitHub"
     }
 
     const locale_en = {};
@@ -151,7 +160,96 @@ document.addEventListener("DOMContentLoaded", () => {
         const l_observer = new MutationObserver(l_callback);
         l_observer.observe(document.body, l_config);
     }
+
+    // Code snippets
+    window.parseCodeSnippet = item => {
+        let fab = item.querySelector("md-fab");
+        if (fab === null) {
+            fab = document.createElement("md-fab");
+            fab.label = translate("copy");
+            fab.addEventListener("click", async () => {
+                try {
+                    const regex = /(.*)content_copy$/;
+                    const value = item.textContent.replace(regex, "$1");
+
+                    await navigator.clipboard.writeText(value);
+                    item.querySelector("md-fab > i").innerHTML = "check";
+                    item.querySelector("md-fab").style.setProperty("--md-sys-color-primary", "rgb(66 164 66)")
+                    await delay(1000);
+                    item.querySelector("i").innerHTML = "content_copy";
+                    item.querySelector("md-fab").style.setProperty("--md-sys-color-primary", "");
+                } catch (e) {
+                    console.warn("Couldn't copy code.", e);
+                    item.querySelector("md-fab").style.setProperty("--md-sys-color-primary", "rgb(183 43 43)");
+                    item.querySelector("md-fab > i").innerHTML = "error";
+                    await delay(1000);
+                    item.querySelector("md-fab").style.setProperty("--md-sys-color-primary", "");
+                    item.querySelector("md-fab > i").innerHTML = "content_copy";
+                }
+            });
+            const icon = document.createElement("i");
+            icon.slot = "icon";
+            icon.classList.add("material-icons");
+            icon.innerHTML = "content_copy";
+            fab.appendChild(icon);
+        } else {
+            item.removeChild(fab);
+        }
+
+        if (item.dataset.language === "json") {
+            try {
+                console.log("Processing JSON in ", item);
+                const obj = JSON.parse(item.textContent);
+
+                const value = JSON.stringify(obj, null, 2);
+
+                const regex1 = /(".*"): (.*)/gm;
+                const subst1 = '<span class="syntax-property">$1</span>: $2';
+                const regex2 = /(<span class="syntax-property">".*"<\/span>): (".*")/gm;
+                const subst2 = '$1: <span class="syntax-string">$2</span>'
+
+                const result = value.replace(regex1, subst1).replace(regex2, subst2);
+                console.log(result);
+
+                item.innerHTML = result;
+                item.style.color = "";
+            } catch (e) {
+                console.warn("Invalid JSON syntax for", item, ".", e);
+                item.style.color = "red";
+            }
+        }
+
+        item.appendChild(fab);
+    }
+
+    document.querySelectorAll("pre").forEach(parseCodeSnippet);
 });
+
+
+/* class CodeSnippet extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    #parseCode() {
+
+    }
+
+    connectedCallback() {
+        this.#parseCode();
+        console.log("created code snippet")
+    }
+
+    disconnectedCallback() {}
+    adoptedCallback() {}
+
+    attributeChangedCallback(name, oldValue, newValue) {
+
+    }
+
+}
+
+customElements.define("code-snippet", CodeSnippet); */
 
 /**
  * The root element (<code>html</code>).

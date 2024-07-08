@@ -434,17 +434,8 @@ function main() {
         // Dialog
         finishedDialog.open = true;
         // Parse the code
-        const lines = recipeJson.split("\n");
-        finishedCode.innerHTML = "";
-        lines.forEach(line => {
-            line = String(line)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
-
-            finishedCode.innerHTML += line + "<br/>";
-        })
+        finishedCode.textContent = recipeJson;
+        parseCodeSnippet(finishedCode);
 
         finishedDialog.addEventListener("close", async () => {
             if (finishedDialog.returnValue === "close") {

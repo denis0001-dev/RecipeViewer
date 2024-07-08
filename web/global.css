@@ -4,6 +4,13 @@
     --font: 'Google Sans', Roboto, 'Open Sans', Helvetica, system-ui;
     --md-sys-typescale-body-large-font: var(--font);
     --md-sys-typescale-body-small-font: var(--font);
+    --md-ref-typeface-plain: var(--font);
+
+    --code-light-color: #1c1c1c;
+    --code-light-bg-color: #cacaca;
+
+    --code-dark-color: #c5c5c5;
+    --code-dark-bg-color: #1b1b1b;
 }
 
 *, *:before, *:after, *::placeholder, :host {
@@ -40,6 +47,14 @@ iframe {
     gap: 5px;
 }
 
+.p {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    width: 100%;
+}
+
 .tip {
     display: none;
     color: #929292;
@@ -64,30 +79,171 @@ html[data-tips="false"] .tip {
 
 pre {
     margin: 10px;
-    background-color: #cacaca;
+    background-color: var(--code-light-bg-color);
     border-radius: 5px;
     padding: 5px;
-    color: #1c1c1c;
+    color: var(--code-light-color);
     font-family: monospace;
     overflow: auto !important;
+    text-align: left !important;
+    position: relative;
+
+    md-fab {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    span {
+        font-family: inherit;
+    }
+
+    .syntax-property {
+        color: #892ca6;
+        font-style: italic;
+    }
+
+    .syntax-string {
+        color: #255315;
+    }
 }
 
-html[data-theme="dark"] > body {
-    --md-sys-color-surface: #010800;
-    --md-sys-color-on-surface: #e2e4df;
-    --md-sys-color-on-surface-variant: #b6bab0;
-    /* --md-sys-color-primary: #9973ff; */
-    --md-dialog-container-color: #1d1d1d;
-    --md-sys-color-secondary-container: #494967;
-    --md-sys-color-on-secondary-container: white;
-    --md-sys-color-error: #e61d11;
-    --md-sys-color-surface-container-high: #1f1f1f;
-    --md-list-container-color: #080808;
-    --md-sys-color-surface-container-highest: #1c1c1c;
-    --md-sys-color-surface-container: #252525;
-    background-color: black;
-    color: white;
-    color-scheme: dark;
+code {
+    background-color: var(--code-light-bg-color);
+    color: var(--code-light-color);
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    font-family: monospace;
+}
+
+.images {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    gap: 5px;
+
+    img {
+        flex: 1;
+        height: 100%;
+        max-width: 100%;
+        width: 0;
+        object-fit: cover;
+        object-position: center;
+        transition: width 0.5s ease-in-out;
+    }
+
+    img:first-child {
+        object-position: left;
+    }
+
+    img:last-child {
+        object-position: right;
+    }
+
+    img:hover {
+        width: 90%;
+    }
+}
+
+.note {
+    color: #515151;
+    font-style: italic;
+    justify-self: left;
+    width: 100%;
+    text-align: left;
+    display: block;
+}
+
+.note::before {
+    content: '* ';
+    font-style: inherit;
+    color: inherit;
+}
+
+/* code-snippet {
+    white-space: pre-wrap;
+    margin: 10px;
+    background-color: var(--code-light-bg-color);
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--code-light-color);
+    font-family: monospace;
+    overflow: auto !important;
+    text-align: left !important;
+
+    * {
+        font-family: inherit;
+    }
+
+    .syntax-property {
+        color: #892ca6;
+        font-style: italic;
+    }
+
+    .syntax-string {
+        color: #255315;
+    }
+} */
+
+
+
+html[data-theme="dark"] {
+    body {
+        --md-sys-color-surface: #010800;
+        --md-sys-color-on-surface: #e2e4df;
+        --md-sys-color-on-surface-variant: #b6bab0;
+        /* --md-sys-color-primary: #9973ff; */
+        --md-dialog-container-color: #1d1d1d;
+        --md-sys-color-secondary-container: #494967;
+        --md-sys-color-on-secondary-container: white;
+        --md-sys-color-error: #e61d11;
+        --md-sys-color-surface-container-high: #1f1f1f;
+        --md-list-container-color: #080808;
+        --md-sys-color-surface-container-highest: #1c1c1c;
+        --md-sys-color-surface-container: #252525;
+        background-color: black;
+        color: white;
+        color-scheme: dark;
+    }
+
+    pre {
+        background-color: var(--code-dark-bg-color);
+        color: var(--code-dark-color);
+
+        .syntax-property {
+            color: #d166b7;
+        }
+
+        .syntax-string {
+            color: #3f9327;
+        }
+    }
+
+    /* code-snippet {
+        background-color: var(--code-dark-bg-color);
+        color: var(--code-dark-color);
+
+        .syntax-property {
+            color: #d166b7;
+        }
+
+        .syntax-string {
+            color: #3f9327;
+        }
+    } */
+
+    code {
+        background-color: var(--code-dark-bg-color);
+        color: var(--code-dark-color);
+    }
 }
 
 @keyframes itemAppear {
