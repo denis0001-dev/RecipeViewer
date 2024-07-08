@@ -1,12 +1,6 @@
 # RecipeViewer Web
-<style>
-    img {
-        height: calc(373px / 4);
-        width: calc(373px / 4);
-    }
-</style>
 
-![](icon.svg)
+<img src="icon.svg" alt="icon" height="93.25" width="93.25" />
 
 Веб-версия RecipeViewer. Поддерживает тот же самый формат JSON.
 <br/>
