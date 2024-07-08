@@ -24,6 +24,10 @@ function main() {
     const createFailDialog = document.getElementById("createFail");
     const failClose = document.getElementById("failClose");
 
+    const invalidJSONDialog = document.getElementById("invalidJSON");
+    const invalidJSONCode = document.getElementById("invalidJSONError");
+    const invalidJSONClose = document.getElementById("invalidJSONClose");
+
     let recipeJSON = {
         ingredients: [],
         steps: []
@@ -97,6 +101,10 @@ function main() {
 
     inputListener(recipeName, checkRecipeName);
 
+    invalidJSONClose.addEventListener("click", () => {
+        invalidJSONDialog.open = false;
+    });
+
     load.addEventListener("click", () => {
         const input = document.createElement("input");
         input.type = "file";
@@ -122,7 +130,14 @@ function main() {
 
     function loadJSON(name, json) {
         recipeName.value = name.substring(0, name.lastIndexOf("."));
-        recipeJSON = JSON.parse(json);
+        try {
+            recipeJSON = JSON.parse(json);
+        } catch (e) {
+            recipeName.value = "";
+            invalidJSONDialog.open = true;
+            invalidJSONCode.textContent = e.toString();
+            return;
+        }
         parseJSON(recipeJSON);
     }
 

@@ -7,7 +7,7 @@
     --md-ref-typeface-plain: var(--font);
 
     --code-light-color: #1c1c1c;
-    --code-light-bg-color: #cacaca;
+    --code-light-bg-color: #e6e5e5;
 
     --code-dark-color: #c5c5c5;
     --code-dark-bg-color: #1b1b1b;
@@ -108,6 +108,15 @@ pre {
     }
 }
 
+pre[data-no-copy] > md-fab {
+    display: none;
+}
+
+md-dialog > div[slot="content"] > pre {
+    --code-dark-bg-color: #2d2d2d;
+    --code-light-bg-color: #dfdfdf;
+}
+
 code {
     background-color: var(--code-light-bg-color);
     color: var(--code-light-color);
@@ -193,7 +202,11 @@ code {
     }
 } */
 
-
+#invalidJSON > div[slot="content"] > #invalidJSONError {
+    height: 200px;
+    white-space: pre-wrap;
+    margin: 10px 0 10px 0;
+}
 
 html[data-theme="dark"] {
     body {

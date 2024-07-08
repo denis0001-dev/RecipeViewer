@@ -109,5 +109,23 @@
                 </div>
             </div>
         </main>
+        <md-dialog id="invalidJSON">
+            <div slot="headline" data-lkey="invalidJSON">Invalid JSON</div>
+            <div slot="content">
+                <span data-lkey="invalidJSONDesc">The JSON that you're trying to load is invalid. See the error below.</span>
+                <pre id="invalidJSONError">Unknown</pre>
+            </div>
+            <div slot="actions">
+                <md-filled-tonal-button id="invalidJSONClose" value="close">
+                    <span data-lkey="close">Close</span>
+                    <svg
+                            slot="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 -960 960 960">
+                        <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                    </svg>
+                </md-filled-tonal-button>
+            </div>
+        </md-dialog>
     </body>
 </html>

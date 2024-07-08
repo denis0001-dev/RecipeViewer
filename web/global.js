@@ -66,7 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
         opensource: "Открытый исходный код",
         sourceCode: "Исходный код этой программы и всех её версий доступен на",
         github: "GitHub - это бесплатная платформа для хранения проектов с открытым исходным кодом. У нее есть встроенный трекер проблем, чтобы исправить их легче.",
-        projectOnGithub: "Проект на GitHub"
+        projectOnGithub: "Проект на GitHub",
+        invalidJSON: "Неправильный JSON",
+        invalidJSONDesc: "JSON-файл, который вы пытаетесь загрузить, неправильный. Посмотрите ошибку ниже.",
     }
 
     const locale_en = {};

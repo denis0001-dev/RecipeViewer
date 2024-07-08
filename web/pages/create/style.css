@@ -176,6 +176,8 @@ main, #top {
     }
 }
 
+
+
 html[data-theme="dark"] {
     #createFinished #finishedRecipeCode {
         background-color: #292929;

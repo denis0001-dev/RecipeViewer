@@ -15,6 +15,14 @@ function main() {
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
 
+    const invalidJSONDialog = document.getElementById("invalidJSON");
+    const invalidJSONCode = document.getElementById("invalidJSONError");
+    const invalidJSONClose = document.getElementById("invalidJSONClose");
+
+    invalidJSONClose.addEventListener("click", () => {
+        invalidJSONDialog.open = false;
+    });
+
     let currentStep = 1;
     let recipe;
 
@@ -171,7 +179,15 @@ function main() {
             reader.onload = async e => {
                 recipeName.value = name.substring(0, name.lastIndexOf("."));
                 const json = await processJSONFile(file, e.target.result);
-                recipe = JSON.parse(json);
+
+                try {
+                    recipe = JSON.parse(json);
+                } catch (e) {
+                    recipeName.value = "";
+                    invalidJSONDialog.open = true;
+                    invalidJSONCode.textContent = e.toString();
+                    return;
+                }
 
                 loadRecipe();
             };
