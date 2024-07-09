@@ -253,6 +253,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
 customElements.define("code-snippet", CodeSnippet); */
 
+class MdBadge extends HTMLElement {
+    constructor() { super() }
+
+    connectedCallback() {
+        const shadow = this.attachShadow({mode: "open"});
+
+        const style = document.createElement("style");
+        style.textContent = `
+            :host > .root {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                user-select: none;
+                overflow: visible;
+                
+                div.badge {
+                    position: absolute;
+                    left: 50%;
+                    bottom: 50%;
+                    display: flex;
+                    background-color: var(--md-sys-color-error, rgb(224 29 29));
+                    border-radius: 8px;
+                    height: 16px;
+                    font-size: 11pt;
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    line-height: 16pt;
+                    letter-spacing: 0.5pt;
+                    color: white;
+                }
+            }
+        `;
+        shadow.appendChild(style);
+
+        const root = document.createElement("div");
+        root.classList.add("root");
+
+        const defaultContent = document.createElement("slot");
+        root.appendChild(defaultContent);
+
+        const badge = document.createElement("div");
+        badge.classList.add("badge");
+
+        const badgeContent = document.createElement("slot");
+        badgeContent.name = "content";
+        badge.appendChild(badgeContent);
+
+        root.appendChild(badge);
+        shadow.appendChild(root);
+    }
+    disconnectedCallbac() {}
+    adoptedCallback() {}
+
+    attributeChangedCallback(name, oldValue, newValue) {
+
+    }
+}
+
+customElements.define("md-badge", MdBadge);
+
 /**
  * The root element (<code>html</code>).
  * @type {HTMLHtmlElement}

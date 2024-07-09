@@ -2,11 +2,13 @@
 
 document.addEventListener("DOMContentLoaded", root_page);
 
+// noinspection JSUnusedGlobalSymbols
 var savedCreateState = {
     name: undefined,
     recipe: undefined
 }
 
+// noinspection JSUnusedGlobalSymbols
 var savedViewState = {
     name: undefined,
     multiplier: 1,
@@ -124,8 +126,10 @@ function root_page() {
         } else if (currentIndex === 2) {
             setPage("view");
         } else if (currentIndex === 3) {
-            setPage("settings");
+            setPage("library");
         } else if (currentIndex === 4) {
+            setPage("settings");
+        } else if (currentIndex === 5) {
             setPage("about");
         }
 
@@ -145,13 +149,14 @@ function root_page() {
                     switchTab(1);
                 } else if (page === "view") {
                     switchTab(2);
-                } else if (page === "settings") {
+                } else if (page === "library") {
                     switchTab(3);
-                } else if (page === "about") {
+                } else if (page === "settings") {
                     switchTab(4);
+                } else if (page === "about") {
+                    switchTab(5);
                 }
             }, 500);
-
         }
     }
 }

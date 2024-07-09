@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-noobserve>
+    <head>
+        <title>Library</title>
+        <meta charset="UTF-8"/>
+        <meta lang="en"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="../../global.css"/>
+        <script src="script.js"></script>
+        <script src="../../global.js"></script>
+
+        <!-- Redirect to homepage -->
+        <script src="../../redirect.js"></script>
+
+        <!-- Material Design -->
+        <link rel="stylesheet" href="../../google-sans/stylesheet.css"/>
+        <script type="importmap">
+            {
+                "imports": {
+                    "@material/web/": "https://esm.run/@material/web/"
+                }
+            }
+        </script>
+        <script type="module">
+            import '@material/web/all.js';
+            import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+            document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+
+            // Initialize Material Design Web Components
+            /* window.customElements.whenDefined().then(() => {
+                window.M.List.autoInitialize();
+                window.M.Drawer.init();
+            }); */
+        </script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    </head>
+
+    <body>
+        library
+    </body>
+</html>
