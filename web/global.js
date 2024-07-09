@@ -261,6 +261,7 @@ class MdBadge extends HTMLElement {
 
         const style = document.createElement("style");
         style.textContent = `
+            /*noinspection CssUnusedSymbol*/
             :host > .root {
                 position: relative;
                 display: flex;
@@ -269,6 +270,7 @@ class MdBadge extends HTMLElement {
                 user-select: none;
                 overflow: visible;
                 
+                /*noinspection CssUnusedSymbol*/
                 div.badge {
                     position: absolute;
                     left: 50%;
