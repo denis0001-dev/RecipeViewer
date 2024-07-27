@@ -20,10 +20,10 @@ function main() {
             const option = select.children[i];
             if (option.value === value) {
                 localize(option.querySelector("div[slot='headline']"));
-                option.selected = true;
+                option.setAttribute("selected", "");
                 option.tabIndex = 0;
             } else {
-                option.selected = false;
+                option.removeAttribute("selected");
                 option.tabIndex = -1;
             }
         }
@@ -32,7 +32,7 @@ function main() {
     function selectedValue(select) {
         for (let i = 0; i < select.children.length; i++) {
             const option = select.children[i];
-            if (option.selected && option.tabIndex === 0) {
+            if (option.hasAttribute("selected") && option.tabIndex === 0) {
                 return option.value;
             }
         }
@@ -73,10 +73,14 @@ function main() {
         top.document.dispatchEvent(new Event("languagechange"));
     });
 
-    displayTips.selected = cookieTips;
+    if (cookieTips) {
+        displayTips.setAttribute("selected", "");
+    } else {
+        displayTips.removeAttribute("selected");
+    }
 
     displayTips.addEventListener("change", () => {
-        const value = displayTips.selected;
+        const value = displayTips.hasAttribute("selected");
         top.setCookie("tips", value);
     });
 
@@ -88,7 +92,7 @@ function main() {
     saveStates.selected = cookieSaveStates;
 
     saveStates.addEventListener("change", () => {
-        const value = saveStates.selected;
+        const value = saveStates.hasAttribute("selected");
         top.setCookie("saveStates", value);
         top.savedViewState = {
             name: undefined,

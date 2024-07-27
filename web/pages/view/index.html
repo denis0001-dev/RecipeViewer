@@ -20,7 +20,7 @@
         <script type="importmap">
             {
                 "imports": {
-                    "@material/web/": "https://esm.run/@material/web/"
+                    "@material/web/": "https://unpkg.com/@material/web/"
                 }
             }
         </script>
@@ -29,12 +29,6 @@
             import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
 
             document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-
-            // Initialize Material Design Web Components
-            /* window.customElements.whenDefined().then(() => {
-                window.M.List.autoInitialize();
-                window.M.Drawer.init();
-            }); */
         </script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     </head>

@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 document.addEventListener("DOMContentLoaded", () => {
     // Allow everything to all iframes
     const iframes = document.querySelectorAll("iframe");
@@ -256,38 +258,13 @@ customElements.define("code-snippet", CodeSnippet); */
 class MdBadge extends HTMLElement {
     constructor() { super() }
 
+    // noinspection JSUnusedGlobalSymbols
     connectedCallback() {
         const shadow = this.attachShadow({mode: "open"});
 
+        // Style
         const style = document.createElement("style");
-        style.textContent = `
-            /*noinspection CssUnusedSymbol*/
-            :host > .root {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                user-select: none;
-                overflow: visible;
-                
-                /*noinspection CssUnusedSymbol*/
-                div.badge {
-                    position: absolute;
-                    left: 50%;
-                    bottom: 50%;
-                    display: flex;
-                    background-color: var(--md-sys-color-error, rgb(224 29 29));
-                    border-radius: 8px;
-                    height: 16px;
-                    font-size: 11pt;
-                    padding-left: 4px;
-                    padding-right: 4px;
-                    line-height: 16pt;
-                    letter-spacing: 0.5pt;
-                    color: white;
-                }
-            }
-        `;
+        style.textContent = "@import url('ui/badge.css');";
         shadow.appendChild(style);
 
         const root = document.createElement("div");
@@ -306,15 +283,47 @@ class MdBadge extends HTMLElement {
         root.appendChild(badge);
         shadow.appendChild(root);
     }
-    disconnectedCallbac() {}
+    // noinspection JSUnusedGlobalSymbols
+    disconnectedCallback() {}
+    // noinspection JSUnusedGlobalSymbols
     adoptedCallback() {}
 
+    // noinspection JSUnusedGlobalSymbols
     attributeChangedCallback(name, oldValue, newValue) {
 
     }
 }
 
+class MdCard extends HTMLElement {
+    constructor() {super()}
+
+    async connectedCallback() {
+        const shadow = this.attachShadow({mode: "open"});
+
+        shadow.innerHTML = `
+            <style>
+                @import url("${await processRelativeURL("ui/card.css")}");
+            </style>
+            <div class="root">
+                <h2 class="title">
+                    <slot name="title"></slot>
+                </h2>
+                <h4 class="subtitle">
+                    <slot name="subtitle"></slot>
+                </h4>
+                <div class="content">
+                    <slot></slot>       
+                </div>
+                <div class="actions">
+                    <slot name="actions"></slot>
+                </div>
+            </div>
+        `
+    }
+}
+
 customElements.define("md-badge", MdBadge);
+customElements.define("md-card", MdCard);
 
 /**
  * The root element (<code>html</code>).
@@ -349,6 +358,20 @@ if (tips) {
     document.html.dataset.tips = "true";
 } else {
     document.html.dataset.tips = "false";
+}
+
+
+async function processRelativeURL(url) {
+    console.debug("Processing URL: "+url);
+    if (window !== top) {
+        console.debug("This function wasn't called from top, rerunning...");
+        return await top.processRelativeURL(url);
+    }
+    console.debug("Fetching the URL");
+
+    const response = await fetch(url);
+    console.debug(response);
+    return response.url;
 }
 
 /**
@@ -513,7 +536,7 @@ function setCookie(name, value) {
 /**
  * Returns an object containing all cookies present in the document.
  * The properties names are the cookie names.
- * @returns {{}}
+ * @returns {{[x: string]: any}}
  */
 function getCookies() {
     const cookies = {};

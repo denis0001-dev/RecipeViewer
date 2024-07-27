@@ -1,0 +1,26 @@
+/*noinspection CssUnusedSymbol*/
+:host > .root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    overflow: visible;
+
+    /*noinspection CssUnusedSymbol*/
+    div.badge {
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        display: flex;
+        background-color: var(--md-sys-color-error, rgb(224 29 29));
+        border-radius: 8px;
+        height: 16px;
+        font-size: 11pt;
+        padding-left: 4px;
+        padding-right: 4px;
+        line-height: 16pt;
+        letter-spacing: 0.5pt;
+        color: white;
+    }
+}

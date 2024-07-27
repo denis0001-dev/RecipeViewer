@@ -1,0 +1,39 @@
+/*noinspection CssUnresolvedCustomProperty*/
+:host > .root {
+    --md-ref-palette-neutral90: #E6E0E9;
+    --md-sys-color-surface-container-highest: var(--md-ref-palette-neutral90);
+
+    border-radius: 12px;
+    padding: 0 16px 0 16px;
+    margin: 4px;
+    background-color: var(--md-sys-color-surface-container-highset, #e6e0e9);
+    color: black;
+
+    .title {
+        margin: 0;
+        font-weight: 400;
+        padding-top: 10px;
+    }
+
+    .subtitle {
+        margin: 0;
+        font-weight: 400;
+        color: rgb(67 67 67);
+    }
+
+    .content {
+        margin: 20px 0;
+        color: rgb(43 43 43);
+    }
+
+    .content:last-child {
+        margin-bottom: 0;
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        padding-bottom: 20px;
+    }
+}
