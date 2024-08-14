@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/global">
+        <SwitchPreference
+            android:key="saveTabStates"
+            android:title="@string/save_tab_states"
+            android:summary="@string/save_tab_states_summary" />
+        <MultiSelectListPreference
+            android:key="lang"
+            android:title="@string/language"
+            android:summary="English" />
+        <MultiSelectListPreference
+            android:key="theme"
+            android:title="@string/theme"
+            android:summary="System" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/recipes">
+        <SwitchPreference
+            android:key="autosaveRecipes"
+            android:title="@string/autosave_recipes"
+            android:summary="@string/autosave_recipes_summary" />
+    </PreferenceCategory>
+</PreferenceScreen>

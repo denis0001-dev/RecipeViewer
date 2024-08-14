@@ -29,8 +29,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         try {
-            binding.createYourRecipeButton.setOnClickListener((v) -> MainActivity.getInstance().switchTab(R.id.page_2));
-            binding.viewARecipeButton.setOnClickListener((v) -> MainActivity.getInstance().switchTab(R.id.page_3));
+            binding.createYourRecipeButton.setOnClickListener((v) -> MainActivity.getInstance().switchTab(R.id.page_create));
+            binding.viewARecipeButton.setOnClickListener((v) -> MainActivity.getInstance().switchTab(R.id.page_view));
         } catch (Exception e) {
             binding.createYourRecipeButton.setText("Error");
             binding.viewARecipeButton.setText("Error");

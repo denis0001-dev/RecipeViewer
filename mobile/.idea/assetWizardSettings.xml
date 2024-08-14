@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Android/Sdk/icons/material/materialicons/info/baseline_info_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Android/Sdk/icons/material/materialicons/collections_bookmark/baseline_collections_bookmark_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="background" />
+                            <entry key="outputName" value="library" />
                             <entry key="sourceFile" value="$PROJECT_DIR$/background.svg" />
                           </map>
                         </option>
