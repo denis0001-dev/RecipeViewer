@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Button xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:theme="@style/Theme.RemoveButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:tint="@color/design_default_color_error" android:contentDescription="@string/clear" app:icon="@drawable/delete" style="@style/Theme.RemoveButton"/>
