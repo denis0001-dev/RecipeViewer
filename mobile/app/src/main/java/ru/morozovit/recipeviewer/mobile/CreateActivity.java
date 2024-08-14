@@ -1,7 +1,5 @@
 package ru.morozovit.recipeviewer.mobile;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,15 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,42 +29,64 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import ru.morozovit.recipeviewer.mobile.databinding.CreateFragmentBinding;
+import ru.morozovit.recipeviewer.mobile.databinding.CreateActivityBinding;
 
-/** @noinspection deprecation*/
-public class CreateFragment extends Fragment {
-    private CreateFragmentBinding binding;
+public class CreateActivity extends AppCompatActivity {
+    private CreateActivityBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        binding = CreateActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.createMoreButton.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.getMenuInflater().inflate(R.menu.create_more, popup.getMenu());
+            popup.getMenu().getItem(1).setOnMenuItemClickListener(v1 -> {
+                clear();
+                return true;
+            });
+            popup.getMenu().getItem(0).setOnMenuItemClickListener(v1 -> {
+                openFileChooser();
+                return true;
+            });
+            popup.show();
+        });
+        binding.createAddIngredientButton.setOnClickListener(v -> addIngredient());
+        binding.createAddStepButton.setOnClickListener(v -> addStep());
+        binding.createBackButton.setOnClickListener(v -> this.onBackPressed());
+    }
+
+    /** @noinspection deprecation*/
+    @Override
+    public void onBackPressed() {
+        if (unsavedChanges()) {
+            this.openUnsavedChangesDialog((a,b) -> {}, (a,b) -> super.onBackPressed(), (a,b) -> {
+                // TODO save recipe
+            });
+            return;
+        }
+        super.onBackPressed();
+    }
+
     private static final int PICK_JSON_FILE = 1;
 
     // System
     public final ArrayList<Ingredient> ingredients = new ArrayList<>();
     public final ArrayList<Step> steps = new ArrayList<>();
 
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
-        binding = CreateFragmentBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
     public void openUnsavedChangesDialog(DialogInterface.OnClickListener cancelled,
                                          DialogInterface.OnClickListener dontsave,
                                          DialogInterface.OnClickListener save) {
-        new MaterialAlertDialogBuilder(MainActivity.getInstance())
+        new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.unsaved_changes)
                 .setMessage(R.string.unsaved_changes_message)
                 .setNeutralButton(R.string.cancel, cancelled)
                 .setNegativeButton(R.string.dontsave, dontsave)
                 .setPositiveButton(R.string.save, save)
                 .show();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     // System
@@ -98,6 +116,14 @@ public class CreateFragment extends Fragment {
         }).setAnchorView(binding.createCreateRecipe).show();
     }
 
+    public boolean unsavedChanges() {
+        return !(
+                ingredients.isEmpty() &&
+                        steps.isEmpty() &&
+                        binding.createRecipeName.getText().toString().isEmpty()
+        );
+    }
+
     public void silentClear() {
         binding.createRecipeName.setText("");
         ingredients.clear();
@@ -105,13 +131,13 @@ public class CreateFragment extends Fragment {
         binding.createIngredientsList.removeAllViews();
         binding.createStepsList.removeAllViews();
     }
-
     // File chooser
+    /** @noinspection deprecation*/
     private void openFileChooser() {
         if (!(
                 ingredients.isEmpty() &&
-                steps.isEmpty() &&
-                binding.createRecipeName.getText().toString().isEmpty()
+                        steps.isEmpty() &&
+                        binding.createRecipeName.getText().toString().isEmpty()
         )) {
             openUnsavedChangesDialog(
                     (a,b) -> {},
@@ -206,7 +232,6 @@ public class CreateFragment extends Fragment {
         return sb.toString();
     }
 
-    /** @noinspection DataFlowIssue*/
     public void addIngredient(String _name, double _count, String _unit) {
         LinearLayout list = binding.createIngredientsList;
         LinearLayout ll = (LinearLayout) LayoutInflater.from(MainActivity.getInstance()).inflate(R.layout.ingredient, list, false);
@@ -234,7 +259,6 @@ public class CreateFragment extends Fragment {
         addIngredient("", 0, "");
     }
 
-    /** @noinspection DataFlowIssue*/
     public void addStep(String _desc) {
         LinearLayout list = binding.createStepsList;
         LinearLayout ll = (LinearLayout) LayoutInflater.from(MainActivity.getInstance()).inflate(R.layout.step, list, false);
@@ -269,32 +293,5 @@ public class CreateFragment extends Fragment {
         for (Step step : steps) {
             step.setNumber(binding.createStepsList.indexOfChild(step.root) + 1);
         }
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        MainActivity activity = MainActivity.getInstance();
-
-        binding.createMoreButton.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(activity, v);
-            popup.getMenuInflater().inflate(R.menu.create_more, popup.getMenu());
-            popup.getMenu().getItem(1).setOnMenuItemClickListener(v1 -> {
-                clear();
-                return true;
-            });
-            popup.getMenu().getItem(0).setOnMenuItemClickListener(v1 -> {
-                openFileChooser();
-                return true;
-            });
-            popup.show();
-        });
-        binding.createAddIngredientButton.setOnClickListener(v -> addIngredient());
-        binding.createAddStepButton.setOnClickListener(v -> addStep());
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 }

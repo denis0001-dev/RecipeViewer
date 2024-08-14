@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/page_home"
         android:enabled="true"
@@ -11,11 +10,6 @@
         android:enabled="true"
         android:icon="@drawable/library"
         android:title="@string/library" />
-    <item
-        android:id="@+id/page_create"
-        android:enabled="true"
-        android:icon="@drawable/edit"
-        android:title="@string/create" />
     <item
         android:id="@+id/page_view"
         android:enabled="true"

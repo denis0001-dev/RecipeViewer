@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 newFragment = new HomeFragment();
             } else if (selectedItemIndex == R.id.page_library) {
                 newFragment = new LibraryFragment();
-            } else if (selectedItemIndex == R.id.page_create) {
-                newFragment = new CreateFragment();
             } else if (selectedItemIndex == R.id.page_view) {
                 newFragment = new ViewFragment();
             } else if (selectedItemIndex == R.id.page_settings) {

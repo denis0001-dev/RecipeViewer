@@ -1,6 +1,8 @@
 package ru.morozovit.recipeviewer.mobile;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,20 @@ public class LibraryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         MainActivity activity = MainActivity.getInstance();
 
+        binding.libCreate.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, CreateActivity.class);
+            startActivity(intent);
+        });
 
+        // Handle back button press
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                return true;
+            }
+            return false;
+        });
     }
 }
