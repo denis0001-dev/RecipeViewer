@@ -2,7 +2,7 @@
 <resources>
     <string name="about">About</string>
     <string name="add">Add</string>
-    <string name="app_name">Recipe Helper</string>
+    <string name="app_name" translatable="false">Recipe Helper</string>
     <string name="back">Back</string>
     <string name="clear">Clear</string>
     <string name="create">Create</string>
@@ -16,7 +16,7 @@
     <string name="ingredientName">Name</string>
     <string name="ingredientUnit">Unit</string>
     <string name="ingredients">Ingredients</string>
-    <string name="json">.json</string>
+    <string name="json" translatable="false">.json</string>
     <string name="loadFromFile">Load from file</string>
     <string name="more">More…</string>
     <string name="recipeName">Recipe Name</string>
@@ -57,7 +57,7 @@
     <string name="no">No</string>
     <string name="error_loading_recipe">Error loading recipe</string>
     <string name="editRecipeData">Edit recipe data</string>
-    <string name="not_implemented">Not implemented yet</string>
+    <string name="not_implemented" translatable="false">Not implemented yet</string>
     <string name="multiply">Multiply…</string>
     <string name="showNumbers">Show numbers</string>
     <string name="removeUnneededFloatingPoints">Remove unnessesary floating points</string>

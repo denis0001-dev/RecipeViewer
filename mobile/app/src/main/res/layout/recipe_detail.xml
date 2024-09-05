@@ -78,53 +78,64 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <!-- Actions -->
-            <LinearLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/recipeDetail_actionsScroll"
+                tools:ignore="UselessParent"
                 android:layout_marginTop="5dp">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.Button.TonalButton.Icon"
-                    android:text="@string/edit"
-                    app:icon="@drawable/edit"
-                    android:id="@+id/recipeDetail_editRecipe"
-                    android:layout_marginEnd="5dp" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.Button.Icon"
-                    android:text="@string/view"
-                    app:icon="@drawable/preview"
-                    android:id="@+id/recipeDetail_view" />
-                <Space
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?attr/materialIconButtonFilledTonalStyle"
-                    android:id="@+id/recipeDetail_export"
-                    android:contentDescription="@string/export"
-                    app:icon="@drawable/export" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?attr/materialIconButtonFilledStyle"
-                    android:id="@+id/recipeDetail_share"
-                    android:contentDescription="@string/share"
-                    app:icon="@drawable/share" />
-                <Button
-                    style="?attr/materialIconButtonFilledStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textStart"
-                    app:icon="@drawable/delete"
-                    android:contentDescription="@string/delete"
-                    android:theme="@style/Theme.RemoveButton"
-                    android:id="@+id/recipeDetail_remove" />
-            </LinearLayout>
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/recipeDetail_editRecipe"
+                        style="@style/Widget.Material3.Button.TonalButton.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="@string/edit"
+                        app:icon="@drawable/edit" />
+
+                    <Button
+                        android:id="@+id/recipeDetail_view"
+                        style="@style/Widget.Material3.Button.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view"
+                        app:icon="@drawable/preview" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/recipeDetail_export"
+                        style="?attr/materialIconButtonFilledTonalStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/export"
+                        app:icon="@drawable/export" />
+
+                    <Button
+                        android:id="@+id/recipeDetail_share"
+                        style="?attr/materialIconButtonFilledStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/share"
+                        app:icon="@drawable/share" />
+
+                    <Button
+                        android:id="@+id/recipeDetail_remove"
+                        style="?attr/materialIconButtonFilledStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/delete"
+                        android:textAlignment="textStart"
+                        android:theme="@style/Theme.RemoveButton"
+                        app:icon="@drawable/delete" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <!-- Ingredients -->
             <com.google.android.material.card.MaterialCardView

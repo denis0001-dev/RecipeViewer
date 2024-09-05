@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -452,6 +453,8 @@ public class LibraryFragment extends Fragment {
                 Button share = view.findViewById(R.id.recipeDetail_share);
                 Button export = view.findViewById(R.id.recipeDetail_export);
                 Button viewButton = view.findViewById(R.id.recipeDetail_view);
+                HorizontalScrollView actionsScroll = view.findViewById(R.id.recipeDetail_actionsScroll);
+                LinearLayout actions = (LinearLayout) actionsScroll.getChildAt(0);
 
                 // Name & description
                 name.setText(recipe.getString("name"));
@@ -632,6 +635,13 @@ public class LibraryFragment extends Fragment {
                                 .show();
                     }
                 });
+                actionsScroll.post(() -> view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        actions.setMinimumWidth(actionsScroll.getWidth());
+                    }
+                }));
 
                 // Ingredients preview
                 ingredients.removeAllViews();

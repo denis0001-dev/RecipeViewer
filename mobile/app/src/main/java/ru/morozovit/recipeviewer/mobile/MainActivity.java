@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 newFragment = new Fragment();
             }
             fragmentTransaction.replace(R.id.main_view, newFragment);
-            fragmentTransaction.setCustomAnimations(R.anim.exit_to_right, R.anim.enter_from_right);
             fragmentTransaction.commit();
             return true;
         });
