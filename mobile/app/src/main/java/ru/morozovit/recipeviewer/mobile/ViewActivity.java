@@ -65,10 +65,6 @@ public class ViewActivity extends AppCompatActivity {
         });
         binding.viewToolbar.setNavigationOnClickListener(v -> onBackPressed());
         binding.viewToolbar.setSubtitle(name);
-
-        /* FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.view_main, prepare);
-        ft.commit(); */
     }
 
     /** @noinspection deprecation*/
