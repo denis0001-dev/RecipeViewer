@@ -4,7 +4,8 @@
     android:height="371dp"
     android:viewportWidth="373"
     android:viewportHeight="371"
-    tools:ignore="VectorRaster">
+    tools:ignore="VectorRaster"
+    tools:keep="@drawable/app_icon">
   <path
       android:pathData="M1,42.89C1,19.2 20.2,0 43.89,0L329.11,0C352.8,0 372,19.2 372,42.89L372,327.11C372,350.8 352.8,370 329.11,370L43.89,370C20.2,370 1,350.8 1,327.11Z"
       android:fillColor="#404040"

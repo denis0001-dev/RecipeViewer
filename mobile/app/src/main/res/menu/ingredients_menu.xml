@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/multiply"
+        app:showAsAction="ifRoom" />
+    <item
+        android:title="@string/showNumbers"
+        app:showAsAction="never"
+        android:checkable="true"
+        android:checked="true" />
+    <item
+        android:title="@string/removeUnneededFloatingPoints"
+        app:showAsAction="never"
+        android:checkable="true"
+        android:checked="false" />
+    <item
+        android:title="@string/saveMultiplier"
+        app:showAsAction="never"
+        android:checkable="true"
+        android:checked="true" />
+</menu>

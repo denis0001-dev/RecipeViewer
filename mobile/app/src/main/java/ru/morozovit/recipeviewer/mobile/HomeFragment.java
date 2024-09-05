@@ -1,6 +1,7 @@
 package ru.morozovit.recipeviewer.mobile;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import ru.morozovit.recipeviewer.mobile.databinding.HomeFragmentBinding;
 
@@ -29,11 +32,23 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         try {
-            // binding.createYourRecipeButton.setOnClickListener((v) -> MainActivity.getInstance().switchTab(R.id.page_create));
-            binding.viewARecipeButton.setOnClickListener((v) -> MainActivity.getInstance().switchTab(R.id.page_view));
+            binding.createYourRecipeButton.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), CreateActivity.class);
+                startActivity(intent);
+            });
+            binding.viewARecipeButton.setOnClickListener((v) ->
+                    Snackbar.make(
+                            binding.homeMainLayout,
+                            R.string.not_implemented,
+                            Snackbar.LENGTH_SHORT
+                    ).show()
+            );
         } catch (Exception e) {
-            binding.createYourRecipeButton.setText("Error");
-            binding.viewARecipeButton.setText("Error");
+            Snackbar.make(
+                    binding.homeMainLayout,
+                    R.string.error,
+                    Snackbar.LENGTH_SHORT
+            ).show();
         }
     }
 

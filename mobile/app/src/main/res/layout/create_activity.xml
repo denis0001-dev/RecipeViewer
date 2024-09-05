@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:ignore="TooDeepLayout">
+    tools:ignore="TooDeepLayout"
+    tools:context=".CreateActivity"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,13 +15,13 @@
         android:theme="@style/Theme.BlackButtons">
 
         <Button
-            android:id="@+id/create_backButton"
             style="?attr/materialIconButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/back"
             app:icon="@drawable/arrow_back"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:id="@+id/create_backButton" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -28,8 +30,8 @@
             android:importantForAutofill="no"
             android:inputType="textAutoCorrect"
             android:maxLength="20"
-            android:id="@+id/create_recipeName"
-            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck"
+            android:id="@+id/create_recipeName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,14 +46,14 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/create_moreButton"
             style="?attr/materialIconButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:contentDescription="@string/more"
             app:icon="@drawable/more"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck"
+            android:id="@+id/create_moreButton" />
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -100,7 +102,6 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <Button
-                                android:id="@+id/create_addIngredientButton"
                                 style="?attr/materialIconButtonFilledStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -109,7 +110,8 @@
                                 app:icon="@drawable/add"
                                 app:layout_constraintRight_toRightOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                tools:ignore="DuplicateSpeakableTextCheck" />
+                                tools:ignore="DuplicateSpeakableTextCheck"
+                                android:id="@+id/create_addIngredientButton" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <com.google.android.material.divider.MaterialDivider
@@ -119,10 +121,11 @@
                             android:layout_marginBottom="10dp" />
 
                         <LinearLayout
-                            android:id="@+id/create_ingredientsList"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="UselessLeaf"
+                            android:id="@+id/create_ingredientsList">
 
                             <!--
                             <LinearLayout
@@ -290,7 +293,6 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <Button
-                                android:id="@+id/create_addStepButton"
                                 style="?attr/materialIconButtonFilledStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -298,7 +300,8 @@
                                 android:theme="@style/Theme.AddButton"
                                 app:icon="@drawable/add"
                                 app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:id="@+id/create_addStepButton" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <com.google.android.material.divider.MaterialDivider
@@ -308,10 +311,11 @@
                             android:layout_marginBottom="10dp" />
 
                         <LinearLayout
-                            android:id="@+id/create_stepsList"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="UselessLeaf"
+                            android:id="@+id/create_stepsList">
 
                             <!--
                             <LinearLayout
@@ -393,12 +397,12 @@
         </ScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/create_createRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:contentDescription="@string/create"
-            app:srcCompat="@drawable/checkmark"/>
+            app:srcCompat="@drawable/checkmark"
+            android:id="@+id/create_createRecipe" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

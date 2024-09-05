@@ -3,6 +3,10 @@
     <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeCloseDrawable">@drawable/close</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.Material3.Dark.ActionBar</item>
+        <item name="android:statusBarColor">?attr/color</item>
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
@@ -12,17 +16,12 @@
     </style>
     <style name="Theme.AddButton" parent="Widget.Material3.Button.IconButton.Filled">
         <item name="colorOnPrimary">#fff</item>
-        <item name="colorPrimary">#8bc34a</item>
+        <item name="colorPrimary">#4CAF50</item>
     </style>
     <style name="Theme.RemoveButton" parent="Widget.Material3.Button.IconButton.Filled">
         <item name="android:textColor">#fff</item>
         <item name="colorButtonNormal">@color/design_default_color_error</item>
         <item name="colorOnPrimary">#fff</item>
         <item name="colorPrimary">@color/design_default_color_error</item>
-    </style>
-    <style name="Theme.EditText" parent="Widget.AppCompat.EditText">
-        <item name="colorControlNormal">?attr/colorOnBackground</item>
-        <item name="colorControlHighlight">?attr/colorOnBackground</item>
-        <item name="colorControlActivated">?attr/colorOnBackground</item>
     </style>
 </resources>

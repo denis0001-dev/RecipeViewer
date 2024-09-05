@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="0dp"
-            android:id="@+id/settings_toolbar"
             app:title="@string/settings"
             app:menu="@menu/settings" />
 
