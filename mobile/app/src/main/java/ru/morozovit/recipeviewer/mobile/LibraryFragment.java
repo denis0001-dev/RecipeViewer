@@ -59,7 +59,7 @@ import java.util.List;
 import ru.morozovit.recipeviewer.mobile.databinding.LibraryFragmentBinding;
 import ru.morozovit.util.android.BetterActivityResult;
 
-public class LibraryFragment extends Fragment {
+public class LibraryFragment extends Fragment implements Page {
     private LibraryFragmentBinding binding;
     public ItemAdapter adapter;
     protected BetterActivityResult<Intent, ActivityResult> activityLauncher = null;
@@ -94,10 +94,35 @@ public class LibraryFragment extends Fragment {
         loadRecipes();
     }
 
-    public void loadRecipes() {
-        RecipeDatabase db = RecipeDatabase.getInstance();
-        try {
+    /** @noinspection deprecation*/
+    @SuppressLint("StaticFieldLeak")
+    private class LoadTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            binding.libSwiperefresh.setRefreshing(false);
+        }
+
+        @Override
+        protected void onPreExecute() {
             binding.libSwiperefresh.setRefreshing(true);
+        }
+
+        @Nullable
+        @Override
+        protected Void doInBackground(Void... voids) {
+            loadRecipes0();
+            return null;
+        }
+    }
+
+    /** @noinspection deprecation*/
+    public void loadRecipes() {
+        new LoadTask().execute();
+    }
+
+    private void loadRecipes0() {
+        RecipeDatabase db = RecipeDatabase.INSTANCE;
+        try {
             adapter.clear();
             ArrayList<JSONObject> recipes = db.getAllRecipes();
             for (JSONObject recipe : recipes) {
@@ -121,7 +146,6 @@ public class LibraryFragment extends Fragment {
                     bottomSheet.show(getActivity().getSupportFragmentManager(), ModalBottomSheet.TAG);
                 }));
             }
-            binding.libSwiperefresh.setRefreshing(false);
         } catch (Exception e) {
             Snackbar.make(
                             binding.libMainLayout,
@@ -153,6 +177,7 @@ public class LibraryFragment extends Fragment {
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
+            private Item item;
             private final TextView headline;
             private final TextView content;
             private final CheckBox checkBox;
@@ -170,6 +195,7 @@ public class LibraryFragment extends Fragment {
             }
 
             public void setSelected(boolean selected) {
+                item.setSelected(selected);
                 this.selected = selected;
                 checkBox.setChecked(selected);
             }
@@ -187,18 +213,43 @@ public class LibraryFragment extends Fragment {
         }
 
         @Override
+        public void onViewRecycled(@NonNull ViewHolder holder) {
+            //noinspection DataFlowIssue
+            holder.selected = holder.item.getSelected();
+        }
+
+        @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Item item = items.get(position);
+            holder.item = item;
             holder.headline.setText(item.getHeadline());
             holder.content.setText(item.getContent());
             holder.checkBox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
-            holder.checkBox.setChecked(holder.selected);
-            holder.itemView.setOnClickListener(item.getOnClick());
-            holder.itemView.setOnLongClickListener(ENTER_SELECT_MODE);
+            if (!selectMode) {
+                holder.itemView.setOnClickListener(item.getOnClick());
+                holder.itemView.setOnLongClickListener(ENTER_SELECT_MODE);
+            } else {
+                holder.itemView.setOnClickListener(v -> holder.toggleSelection());
+                holder.itemView.setOnLongClickListener(null);
+                holder.checkBox.setOnCheckedChangeListener((v, s) -> {
+                    holder.selected = s;
+                    holder.item.setSelected(s);
+                    if (s) {
+                        selectedItems.add(holder);
+                    } else {
+                        selectedItems.remove(holder);
+                    }
+                    //noinspection DataFlowIssue
+                    actionMode.setTitle(selectedItems.size() + " selected");
+                    if (selectedItems.isEmpty()) exitSelectMode();
+                });
+                //noinspection DataFlowIssue
+                holder.checkBox.setChecked(holder.selected || holder.item.getSelected());
+            }
         }
 
         /** @noinspection DataFlowIssue*/
-        public void enterSelectMode(CheckBox startItem) {
+        private void enterSelectMode0(CheckBox startItem) {
             ActionMode.Callback callback = new ActionMode.Callback() {
                 @Override
                 public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -222,7 +273,7 @@ public class LibraryFragment extends Fragment {
                                     SwipeRefreshLayout swipeRefresh = fragment.getActivity().findViewById(R.id.lib_swiperefresh);
                                     for (ViewHolder selectedItem : selectedItems) {
                                         String recipeName = String.valueOf(selectedItem.headline.getText());
-                                        RecipeDatabase db = RecipeDatabase.getInstance();
+                                        RecipeDatabase db = RecipeDatabase.INSTANCE;
                                         try {
                                             db.deleteRecipe(recipeName);
                                         } catch (Exception e) {
@@ -252,7 +303,7 @@ public class LibraryFragment extends Fragment {
                                         String recipeName = String.valueOf(holder.headline.getText());
                                         JSONObject recipe;
                                         try {
-                                            RecipeDatabase db = RecipeDatabase.getInstance();
+                                            RecipeDatabase db = RecipeDatabase.INSTANCE;
                                             recipe = db.getRecipe(recipeName);
 
                                             String fileName = recipe.getString("name") + ".json";
@@ -289,10 +340,16 @@ public class LibraryFragment extends Fragment {
             actionMode.setTitle("0 selected");
             for (int i = 0; i < getItemCount(); i++) {
                 ViewHolder holder = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+                Item item = items.get(i);
                 if (holder != null) {
                     holder.checkBox.setVisibility(View.VISIBLE);
+                    holder.checkBox.setChecked(false);
+                    holder.item.setSelected(false);
+                    holder.selected = false;
                     holder.checkBox.setOnCheckedChangeListener((v, s) -> {
                         holder.selected = s;
+                        if (holder.item == null) holder.item = item;
+                        holder.item.setSelected(s);
                         if (s) {
                             selectedItems.add(holder);
                         } else {
@@ -309,7 +366,7 @@ public class LibraryFragment extends Fragment {
             selectMode = true;
         }
 
-        public void exitSelectMode() {
+        private void exitSelectMode0() {
             try {
                 //noinspection DataFlowIssue
                 actionMode.finish();
@@ -330,6 +387,14 @@ public class LibraryFragment extends Fragment {
             selectMode = false;
         }
 
+        public void enterSelectMode(CheckBox startItem) {
+            recyclerView.post(() -> enterSelectMode0(startItem));
+        }
+
+        public void exitSelectMode() {
+            recyclerView.post(this::exitSelectMode0);
+        }
+
         @Override
         public int getItemCount() {
             return items.size();
@@ -337,7 +402,7 @@ public class LibraryFragment extends Fragment {
 
         public void addItem(Item item) {
             items.add(item);
-            notifyItemInserted(items.size() - 1);
+            recyclerView.post(() -> notifyItemInserted(items.size() - 1));
         }
         
         /** @noinspection unused*/
@@ -357,7 +422,6 @@ public class LibraryFragment extends Fragment {
         }
     }
 
-    /** */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -503,7 +567,7 @@ public class LibraryFragment extends Fragment {
                                         recipe.put("desc", newDesc);
                                     }
                                     update();
-                                    RecipeDatabase db = RecipeDatabase.getInstance();
+                                    RecipeDatabase db = RecipeDatabase.INSTANCE;
                                     db.deleteRecipe(oldName);
                                     db.saveRecipe(recipe);
                                     SwipeRefreshLayout swipeRefresh = getActivity().findViewById(R.id.lib_swiperefresh);
@@ -579,7 +643,7 @@ public class LibraryFragment extends Fragment {
                             .setTitle(R.string.delete_recipe)
                             .setMessage(R.string.delete_recipe_desc)
                             .setPositiveButton(R.string.yes, (dialog, which) -> {
-                                RecipeDatabase db = RecipeDatabase.getInstance();
+                                RecipeDatabase db = RecipeDatabase.INSTANCE;
                                 try {
                                     db.deleteRecipe(recipe.getString("name"));
                                 } catch (Exception ex) {
@@ -736,6 +800,13 @@ public class LibraryFragment extends Fragment {
                             .show();
                 } catch (Exception ex) {}
             }
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position == 1) {
+            loadRecipes();
         }
     }
 }

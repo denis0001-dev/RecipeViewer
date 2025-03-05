@@ -191,7 +191,7 @@ public class CreateActivity extends AppCompatActivity {
                 JSONObject recipeBody = recipe.getJSONObject("body");
                 recipeCode.setText(recipeBody.toString(2));
                 saveToLib.setOnClickListener(v -> {
-                    RecipeDatabase db = RecipeDatabase.getInstance();
+                    RecipeDatabase db = RecipeDatabase.INSTANCE;
                     try {
                         db.saveRecipe(recipe);
                         this.dismiss();
@@ -199,7 +199,7 @@ public class CreateActivity extends AppCompatActivity {
                                 getActivity().findViewById(R.id.create_mainLayout),
                                 R.string.recipe_saved,
                                 Snackbar.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         new MaterialAlertDialogBuilder(getActivity())
                                 .setTitle(R.string.error_saving_recipe)
                                 .setMessage(R.string.error_saving_recipe_details)
@@ -273,7 +273,7 @@ public class CreateActivity extends AppCompatActivity {
     public final ArrayList<Step> steps = new ArrayList<>();
 
     public final DialogInterface.OnClickListener DEFAULT_SAVE = (dialog, which) -> {
-        RecipeDatabase db = RecipeDatabase.getInstance();
+        RecipeDatabase db = RecipeDatabase.INSTANCE;
         try {
             //noinspection DataFlowIssue
             db.saveRecipe(generateJSON());
@@ -313,11 +313,11 @@ public class CreateActivity extends AppCompatActivity {
 
         Snackbar.make(binding.createMainLayout, R.string.cleared, Snackbar.LENGTH_LONG).setAction(R.string.undo, v -> {
             for (Ingredient ing: prevIngs) {
-                ingList.addView(ing.root);
+                ingList.addView(ing.getRoot());
                 ingredients.add(ing);
             }
             for (Step step: prevSteps) {
-                stepsList.addView(step.root);
+                stepsList.addView(step.getRoot());
                 steps.add(step);
             }
             binding.createRecipeName.setText(recipeName);
@@ -327,7 +327,7 @@ public class CreateActivity extends AppCompatActivity {
     public boolean unsavedChanges() {
         JSONObject recipe = generateJSON();
         try {
-            RecipeDatabase db = RecipeDatabase.getInstance();
+            RecipeDatabase db = RecipeDatabase.INSTANCE;
             //noinspection DataFlowIssue
             return !db.getRecipe(recipe.getString("name")).toString().equals(recipe.toString());
         } catch (RecipeDatabase.StorageException e) {
@@ -489,13 +489,13 @@ public class CreateActivity extends AppCompatActivity {
 
     public void updateIngredientNumbers() {
         for (Ingredient ingredient : ingredients) {
-            ingredient.setNumber(binding.createIngredientsList.indexOfChild(ingredient.root) + 1);
+            ingredient.setNumber(binding.createIngredientsList.indexOfChild(ingredient.getRoot()) + 1);
         }
     }
 
     public void updateStepNumbers() {
         for (Step step : steps) {
-            step.setNumber(binding.createStepsList.indexOfChild(step.root) + 1);
+            step.setNumber(binding.createStepsList.indexOfChild(step.getRoot()) + 1);
         }
     }
 }

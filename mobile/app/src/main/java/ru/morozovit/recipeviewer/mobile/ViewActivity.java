@@ -77,7 +77,7 @@ public class ViewActivity extends AppCompatActivity {
 
     /** @noinspection deprecation*/
     public class ViewPagerAdapter extends FragmentPagerAdapter {
-        public Page[] fragments;
+        public final Page[] fragments;
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -100,14 +100,10 @@ public class ViewActivity extends AppCompatActivity {
         }
     }
 
-    public interface Page {
-        default void onPageSelected(int position) {}
-    }
-
     public static class IngredientsPrepare extends Fragment implements Page {
         public ViewIngredientsBinding binding;
-        public ArrayList<IngredientData> ingredients;
-        public ViewPager pager;
+        public final ArrayList<IngredientData> ingredients;
+        public final ViewPager pager;
 
         public IngredientsPrepare(ArrayList<IngredientData> ingredients, ViewPager pager) {
             this.ingredients = ingredients;
@@ -165,18 +161,13 @@ public class ViewActivity extends AppCompatActivity {
 
             binding.viewIngsNext.setOnClickListener(v -> pager.setCurrentItem(1));
         }
-
-        @Override
-        public void onDestroyView() {
-            super.onDestroyView();
-        }
     }
 
     public static class StepFragment extends Fragment implements Page {
         public ViewIngredientFragmentBinding binding;
-        public String step;
-        public int stepNumber;
-        public ViewPager pager;
+        public final String step;
+        public final int stepNumber;
+        public final ViewPager pager;
 
         public StepFragment(String step, int stepNumber, ViewPager pager) {
             this.step = step;

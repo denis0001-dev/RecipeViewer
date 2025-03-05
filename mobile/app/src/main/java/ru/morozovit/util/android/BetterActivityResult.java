@@ -66,10 +66,6 @@ public final class BetterActivityResult<I, R> {
         this.launcher = caller.registerForActivityResult(contract, this::callOnActivityResult);
     }
 
-    public void setOnActivityResult(@Nullable OnActivityResult<R> onActivityResult) {
-        this.onActivityResult = onActivityResult;
-    }
-
     /**
      * Launch activity, same as {@link ActivityResultLauncher#launch(Object)} except that it allows a callback
      * executed after receiving a result from the target activity.

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import ru.morozovit.recipeviewer.mobile.databinding.SettingsFragmentBinding;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements Page {
     private SettingsFragmentBinding binding;
 
     @Override
